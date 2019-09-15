@@ -17,6 +17,7 @@ namespace GameProcess {
         bool         _isDeactivate     = false;
 
         public BubbleReward ActiveBubbleReward {get; private set;}
+        public Rigidbody2D  Rigidbody          {get; private set;}
 
         static void AddToCache(GameObject key, Bubble bubble) {
             if ( _cache.ContainsKey(key) ) {
@@ -66,6 +67,7 @@ namespace GameProcess {
             _animator = GetComponent<Animator>();
 
             SetBubbleReward();
+            Rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void OnDestroy() {
@@ -188,7 +190,7 @@ namespace GameProcess {
                 return;
             }
 
-            PlayReward();
+            //PlayReward();
 
             gameObject.SetActive(false);
         }

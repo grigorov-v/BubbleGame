@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
-
         static Dictionary<GameObject, Bubble> _cache = new Dictionary<GameObject, Bubble>();
 
-        public bool   BubbleFromGun = false;
-
-        [SerializeField] BubbleTags         _bubbleTag    = BubbleTags.None;
+        [SerializeField] BubbleTags         _bubbleTag     = BubbleTags.None;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
 
         List<Bubble> _connectedBubbles = new List<Bubble>();
         Animator     _animator         = null;
-        bool         _isDeactivate     = false;
-
+      
         public BubbleReward ActiveBubbleReward {get; private set;}
         public Rigidbody2D  Rigidbody          {get; private set;}
+        public float        Force              {get; set;}
+        public bool         IsDeactivate       {get; set;}
+        public bool         BubbleFromGun      {get; set;}
 
         static void AddToCache(GameObject key, Bubble bubble) {
             if ( _cache.ContainsKey(key) ) {
@@ -43,7 +43,11 @@ namespace GameProcess {
             return _cache[key];
         }
 
-        void SetBubbleReward() {
+        public void SetBubbleTag(BubbleTags tag) {
+            _bubbleTag = tag;
+        }
+
+        public void SetBubbleReward() {
             foreach (var bubbleReward in _bubbleRewards) {
                 var isActive = (bubbleReward.BubbleTag == _bubbleTag);
                 bubbleReward.gameObject.SetActive(isActive);
@@ -134,6 +138,20 @@ namespace GameProcess {
             TryRemoveConnectedBubble(bubble);
         }
 
+        private void OnCollisionEnter2D(Collision2D other) {
+            var normale = Vector2.zero;
+
+            if ( other.gameObject.CompareTag("LeftWall") ) {
+                normale = other.transform.right;
+            } else if ( other.gameObject.CompareTag("RightWall") ) {
+                normale = -other.transform.right;
+            } else if ( other.gameObject.CompareTag("Bubble") ) {
+                Rigidbody.velocity = Vector2.zero;
+            }
+            
+            Rigidbody.AddForce(normale * Force, ForceMode2D.Impulse);
+        }
+
         [ContextMenu("DestroyAll")]
         public void TryDeactivateAllConnectedBubbles() {
             var count = GetCountConnectedBubbles();
@@ -150,11 +168,11 @@ namespace GameProcess {
 
         [ContextMenu("PlayBurstAnimation")]
         void PlayDeactivateAnimation() {
-            if ( _isDeactivate ) {
+            if ( IsDeactivate ) {
                 return;
             }
 
-            _isDeactivate = true;
+            IsDeactivate = true;
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
         }
 
@@ -175,7 +193,7 @@ namespace GameProcess {
                     continue;
                 }
 
-                if ( bub._isDeactivate ) {
+                if ( bub.IsDeactivate ) {
                     continue;
                 }
 
@@ -186,13 +204,17 @@ namespace GameProcess {
         }
 
         public void DeactivateBetweenAnimation() {
-            if ( !_isDeactivate ) {
+            if ( !IsDeactivate ) {
                 return;
             }
 
-            //PlayReward();
-
             gameObject.SetActive(false);
+        }
+
+        public static BubbleTags GetRandomBubbleTags() {
+            var count = Enum.GetNames(typeof(BubbleTags)).Length;
+            var rand = UnityEngine.Random.Range(0, count);
+            return (BubbleTags)rand;
         }
 
         static void RecursiveDeactivateConnectedBubbles(List<Bubble> bubbles) {
@@ -201,7 +223,7 @@ namespace GameProcess {
                     continue;
                 }
 
-                if ( bub._isDeactivate ) {
+                if ( bub.IsDeactivate ) {
                     continue;
                 }
 

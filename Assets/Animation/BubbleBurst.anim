@@ -21,21 +21,21 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: d39b9e1371fb2e84e937980c43d23ee9, type: 3}
-    - time: 0.03846154
+    - time: 0.029411765
       value: {fileID: 21300000, guid: d284de76edf82f440a982124be223606, type: 3}
-    - time: 0.07692308
+    - time: 0.05882353
       value: {fileID: 21300000, guid: 11e5337776121ce43a4ac10c556a90ba, type: 3}
-    - time: 0.115384616
+    - time: 0.0882353
       value: {fileID: 21300000, guid: ade845f8afdf6b948b552104cae76f49, type: 3}
-    - time: 0.15384616
+    - time: 0.11764706
       value: {fileID: 21300000, guid: 79a0d5ddba4f2444c962d202eb537eb8, type: 3}
-    - time: 0.1923077
+    - time: 0.14705883
       value: {fileID: 21300000, guid: a2d03a587e140f74082ae2c56645f260, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 130
+  m_SampleRate: 170
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -61,7 +61,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.2
+    m_StopTime: 0.15294118
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -81,7 +81,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.1923077
+  - time: 0.14705883
     functionName: DeactivateBetweenAnimation
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -2,6 +2,8 @@
 using UnityEngine;
 using System;
 
+using Core.Events;
+
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
@@ -12,6 +14,8 @@ namespace GameProcess {
 
         List<Bubble> _connectedBubbles = new List<Bubble>();
         Animator     _animator         = null;
+        Action       _collisionAction  = null;
+        bool         _init             = false;
       
         public BubbleReward ActiveBubbleReward {get; private set;}
         public Rigidbody2D  Rigidbody          {get; private set;}
@@ -47,7 +51,7 @@ namespace GameProcess {
             _bubbleTag = tag;
         }
 
-        public void SetBubbleReward() {
+        public void UpdateBubbleReward() {
             foreach (var bubbleReward in _bubbleRewards) {
                 var isActive = (bubbleReward.BubbleTag == _bubbleTag);
                 bubbleReward.gameObject.SetActive(isActive);
@@ -63,19 +67,28 @@ namespace GameProcess {
                 return;
             }
             
-            SetBubbleReward();
+            UpdateBubbleReward();
         }
 
         private void Awake() {
-            AddToCache(gameObject, this);
-            _animator = GetComponent<Animator>();
-
-            SetBubbleReward();
-            Rigidbody = GetComponent<Rigidbody2D>();
+            Init();
         }
 
         private void OnDestroy() {
             RemoveToCache(gameObject);
+        }
+
+        public void Init() {
+            if ( _init ) {
+                return;
+            }
+
+            AddToCache(gameObject, this);
+            _animator = GetComponent<Animator>();
+
+            UpdateBubbleReward();
+            Rigidbody = GetComponent<Rigidbody2D>();
+            _init = true;
         }
 
         public bool CheckConnectedBubble(Bubble bubble) {
@@ -147,9 +160,11 @@ namespace GameProcess {
                 normale = -other.transform.right;
             } else if ( other.gameObject.CompareTag("Bubble") ) {
                 Rigidbody.velocity = Vector2.zero;
+                Force = 0;
             }
             
             Rigidbody.AddForce(normale * Force, ForceMode2D.Impulse);
+            EventManager.Fire(new PostBubbleCollision(this, other));
         }
 
         [ContextMenu("DestroyAll")]
@@ -213,7 +228,7 @@ namespace GameProcess {
 
         public static BubbleTags GetRandomBubbleTags() {
             var count = Enum.GetNames(typeof(BubbleTags)).Length;
-            var rand = UnityEngine.Random.Range(0, count);
+            var rand = UnityEngine.Random.Range(1, count);
             return (BubbleTags)rand;
         }
 

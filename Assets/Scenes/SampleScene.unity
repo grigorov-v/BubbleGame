@@ -3074,9 +3074,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _force: 10
   _bubblesCenter: {fileID: 798644637}
-  _bubble: {fileID: 545458494}
   _body: {fileID: 663557689}
   _lerpMove: 10
+  _lastBubble: {fileID: 545458494}
 --- !u!4 &706930387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6875112204230237489, guid: 0b2c2c5e54be3af4891857d610b164c7,

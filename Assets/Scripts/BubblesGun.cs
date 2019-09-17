@@ -50,7 +50,7 @@ namespace GameProcess {
         }
 
         void ReloadBubble() {
-            _lastBubble = (!_lastBubble.gameObject.activeSelf) ? _lastBubble : Instantiate(_lastBubble);
+            _lastBubble = Instantiate(_lastBubble);
             _lastBubble.Init();
 
             _lastBubble.transform.SetParent(_bubblesCenter);
@@ -61,6 +61,9 @@ namespace GameProcess {
             var tag = Bubble.GetRandomBubbleTags();
             _lastBubble.SetBubbleTag(tag);
             _lastBubble.UpdateBubbleReward();
+            _lastBubble.IsDeactivate = false;
+            _lastBubble.gameObject.SetActive(true);
+            _lastBubble.PlayStayAnimation();
         }
 
         void OnBubbleCollision(PostBubbleCollision e) {

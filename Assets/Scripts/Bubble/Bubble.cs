@@ -7,7 +7,9 @@ using Core.Events;
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
-        static Dictionary<GameObject, Bubble> _cache = new Dictionary<GameObject, Bubble>();
+        const string STAY_ANIMATION_NAME       = "Stay";
+
+        public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
         [SerializeField] BubbleTags         _bubbleTag     = BubbleTags.None;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
@@ -24,27 +26,48 @@ namespace GameProcess {
         public bool         BubbleFromGun      {get; set;}
 
         static void AddToCache(GameObject key, Bubble bubble) {
-            if ( _cache.ContainsKey(key) ) {
+            if ( CacheBubbles == null ) {
+                CacheBubbles = new Dictionary<GameObject, Bubble>();
+            }
+
+            if ( CacheBubbles.ContainsKey(key) ) {
                 return;
             }
 
-            _cache.Add(key, bubble);
+            CacheBubbles.Add(key, bubble);
         }
 
         static void RemoveToCache(GameObject key) {
-            if ( !_cache.ContainsKey(key) ) {
+            if ( CacheBubbles == null ) {
                 return;
             }
 
-            _cache.Remove(key);
+            if ( !CacheBubbles.ContainsKey(key) ) {
+                return;
+            }
+
+            CacheBubbles.Remove(key);
         }
 
         static Bubble FindToCache(GameObject key) {
-            if ( !_cache.ContainsKey(key) ) {
+            if ( !CacheBubbles.ContainsKey(key) ) {
                 return null;
             }
 
-            return _cache[key];
+            return CacheBubbles[key];
+        }
+
+        public static Bubble GetFreeBubble() {
+            foreach (var cacheItem in CacheBubbles) {
+                var bubble = cacheItem.Value;
+                if ( bubble.gameObject.activeSelf ) {
+                    continue;
+                }
+
+                return bubble;
+            }
+
+            return null;
         }
 
         public void SetBubbleTag(BubbleTags tag) {
@@ -167,7 +190,6 @@ namespace GameProcess {
             EventManager.Fire(new PostBubbleCollision(this, other));
         }
 
-        [ContextMenu("DestroyAll")]
         public void TryDeactivateAllConnectedBubbles() {
             var count = GetCountConnectedBubbles();
             if ( count < 3 ) {
@@ -181,7 +203,6 @@ namespace GameProcess {
             }
         }
 
-        [ContextMenu("PlayBurstAnimation")]
         void PlayDeactivateAnimation() {
             if ( IsDeactivate ) {
                 return;
@@ -189,6 +210,10 @@ namespace GameProcess {
 
             IsDeactivate = true;
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
+        }
+
+        public void PlayStayAnimation() {
+            _animator.Play(STAY_ANIMATION_NAME);
         }
 
         void PlayReward() {
@@ -223,7 +248,8 @@ namespace GameProcess {
                 return;
             }
 
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
         public static BubbleTags GetRandomBubbleTags() {
@@ -234,6 +260,10 @@ namespace GameProcess {
 
         static void RecursiveDeactivateConnectedBubbles(List<Bubble> bubbles) {
             foreach ( var bub in bubbles ) {
+                if ( !bub ) {
+                    continue;
+                }
+                
                 if ( !bub.gameObject.activeSelf ) {
                     continue;
                 }

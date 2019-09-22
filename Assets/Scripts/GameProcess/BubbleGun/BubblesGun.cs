@@ -6,12 +6,12 @@ using Core.Events;
 
 namespace GameProcess {
     public class BubblesGun : MonoBehaviour {
-        [SerializeField] float     _force         = 10;
-        [SerializeField] Transform _bubblesCenter = null;
-        [SerializeField] Transform _body          = null;
-        [SerializeField] float     _lerpMove      = 10f;
-
-        [SerializeField] Bubble    _lastBubble    = null;
+        [SerializeField] float              _force         = 10;
+        [SerializeField] Transform          _bubblesCenter = null;
+        [SerializeField] Transform          _body          = null;
+        [SerializeField] float              _lerpMove      = 10f;
+        [SerializeField] Bubble             _lastBubble    = null;
+        [SerializeField] BubbleGunIndicator _indicator     = null;
 
         private void Start() {
             EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
@@ -37,6 +37,9 @@ namespace GameProcess {
             if ( Input.GetMouseButtonUp(0) ) {
                 Shot();
             }
+
+            var isActiveIndicator = Input.GetMouseButton(0);
+            _indicator.SetActiveIndicator(isActiveIndicator);
         }
 
         void Shot() {

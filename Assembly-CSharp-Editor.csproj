@@ -331,9 +331,6 @@
  <Reference Include="DOTweenEditor">
  <HintPath>D:/Projects/BubbleGame/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
- <Reference Include="DOTweenUpgradeManager">
- <HintPath>D:/Projects/BubbleGame/Assets/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll</HintPath>
- </Reference>
  <Reference Include="DOTween">
  <HintPath>D:/Projects/BubbleGame/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>

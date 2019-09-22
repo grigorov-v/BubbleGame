@@ -79,6 +79,38 @@ namespace GameProcess {
             RemoveToCache(gameObject);
         }
 
+        private void OnTriggerStay2D(Collider2D other) {
+            var bubble = FindToCache(other.gameObject);
+            TryAddConnectedBubble(bubble);
+
+            if ( BubbleFromGun ) {
+                TryDeactivateAllConnectedBubbles();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other) {
+            var bubble = FindToCache(other.gameObject);
+            TryRemoveConnectedBubble(bubble);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other) {
+            var newDir = Vector2.zero;
+
+            if ( other.gameObject.CompareTag("LeftWall") ) {
+                newDir = other.transform.right;
+            } else if ( other.gameObject.CompareTag("RightWall") ) {
+                newDir = -other.transform.right;
+            } else if ( other.gameObject.CompareTag("Bubble") ) {
+                Rigidbody.velocity = Vector2.zero;
+                Rigidbody.gravityScale = -1;
+                Force = 0;
+            }
+            
+            Rigidbody.AddForce(newDir * Force, ForceMode2D.Impulse);
+            EventManager.Fire(new PostBubbleCollision(this, other));
+        }
+
+
         public void Init() {
             if ( _init ) {
                 return;
@@ -157,36 +189,6 @@ namespace GameProcess {
             }
 
             _connectedBubbles.Remove(bubble);
-        }
-
-        private void OnTriggerStay2D(Collider2D other) {
-            var bubble = FindToCache(other.gameObject);
-            TryAddConnectedBubble(bubble);
-
-            if ( BubbleFromGun ) {
-                TryDeactivateAllConnectedBubbles();
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D other) {
-            var bubble = FindToCache(other.gameObject);
-            TryRemoveConnectedBubble(bubble);
-        }
-
-        private void OnCollisionEnter2D(Collision2D other) {
-            var normale = Vector2.zero;
-
-            if ( other.gameObject.CompareTag("LeftWall") ) {
-                normale = other.transform.right;
-            } else if ( other.gameObject.CompareTag("RightWall") ) {
-                normale = -other.transform.right;
-            } else if ( other.gameObject.CompareTag("Bubble") ) {
-                Rigidbody.velocity = Vector2.zero;
-                Force = 0;
-            }
-            
-            Rigidbody.AddForce(normale * Force, ForceMode2D.Impulse);
-            EventManager.Fire(new PostBubbleCollision(this, other));
         }
 
         public void TryDeactivateAllConnectedBubbles() {

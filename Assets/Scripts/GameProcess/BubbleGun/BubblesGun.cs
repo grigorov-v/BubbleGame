@@ -44,6 +44,7 @@ namespace GameProcess {
 
         void Shot() {
             _lastBubble.Rigidbody.simulated = true;
+            _lastBubble.Rigidbody.gravityScale = 0;
             _lastBubble.Force = _force;
             _lastBubble.BubbleFromGun = true;
             _lastBubble.transform.SetParent(null);

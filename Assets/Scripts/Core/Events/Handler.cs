@@ -58,7 +58,7 @@ namespace Core.Events {
 				if ( !_removed.Contains(current) ) {
 					try {
 						current.Invoke(arg);
-					} catch ( Exception e ) {
+					} catch {
 						//Log.TraceException(new EventCallbackException(typeof(T), e));
 					}
 				}

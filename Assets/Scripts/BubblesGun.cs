@@ -14,11 +14,11 @@ namespace GameProcess {
         [SerializeField] Bubble    _lastBubble    = null;
 
         private void Start() {
-            EventManager.Subscribe<PostBubbleCollision>(this, OnBubbleCollision);
+            EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
         }
 
         private void OnDestroy() {
-            EventManager.Unsubscribe<PostBubbleCollision>(OnBubbleCollision);
+            EventManager.Unsubscribe<PostBubbleCollision>(OnPostBubbleCollision);
         }
 
         private void Update() {
@@ -42,7 +42,6 @@ namespace GameProcess {
         void Shot() {
             _lastBubble.Rigidbody.simulated = true;
             _lastBubble.Force = _force;
-            _lastBubble.IsDeactivate = false;
             _lastBubble.BubbleFromGun = true;
             _lastBubble.transform.SetParent(null);
 
@@ -50,23 +49,17 @@ namespace GameProcess {
         }
 
         void ReloadBubble() {
-            _lastBubble = Instantiate(_lastBubble);
-            _lastBubble.Init();
+            _lastBubble = _lastBubble.CopyBubble();//Когда будет ограниченное кол-во, брать из пула
 
+            _lastBubble.Init();
             _lastBubble.transform.SetParent(_bubblesCenter);
             _lastBubble.transform.localPosition = Vector2.zero;
             _lastBubble.Rigidbody.simulated = false;
             _lastBubble.Force = 0;
-
-            var tag = Bubble.GetRandomBubbleTags();
-            _lastBubble.SetBubbleTag(tag);
-            _lastBubble.UpdateBubbleReward();
-            _lastBubble.IsDeactivate = false;
-            _lastBubble.gameObject.SetActive(true);
-            _lastBubble.PlayStayAnimation();
+            _lastBubble.RandomUpdateBubbleReward();
         }
 
-        void OnBubbleCollision(PostBubbleCollision e) {
+        void OnPostBubbleCollision(PostBubbleCollision e) {
             if ( e.Bubble != _lastBubble ) {
                 return;
             }

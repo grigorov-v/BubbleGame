@@ -7,7 +7,6 @@ using Core.Events;
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
-        const string STAY_ANIMATION_NAME       = "Stay";
 
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
@@ -16,14 +15,14 @@ namespace GameProcess {
 
         List<Bubble> _connectedBubbles = new List<Bubble>();
         Animator     _animator         = null;
-        Action       _collisionAction  = null;
         bool         _init             = false;
       
         public BubbleReward ActiveBubbleReward {get; private set;}
         public Rigidbody2D  Rigidbody          {get; private set;}
-        public float        Force              {get; set;}
-        public bool         IsDeactivate       {get; set;}
+        public bool         IsDeactivate       {get; private set;}
+
         public bool         BubbleFromGun      {get; set;}
+        public float        Force              {get; set;}
 
         static void AddToCache(GameObject key, Bubble bubble) {
             if ( CacheBubbles == null ) {
@@ -57,34 +56,13 @@ namespace GameProcess {
             return CacheBubbles[key];
         }
 
-        public static Bubble GetFreeBubble() {
-            foreach (var cacheItem in CacheBubbles) {
-                var bubble = cacheItem.Value;
-                if ( bubble.gameObject.activeSelf ) {
-                    continue;
-                }
-
-                return bubble;
-            }
-
-            return null;
+        public static BubbleTags GetRandomBubbleTags() {
+            var count = Enum.GetNames(typeof(BubbleTags)).Length;
+            var rand = UnityEngine.Random.Range(1, count);
+            return (BubbleTags)rand;
         }
 
-        public void SetBubbleTag(BubbleTags tag) {
-            _bubbleTag = tag;
-        }
-
-        public void UpdateBubbleReward() {
-            foreach (var bubbleReward in _bubbleRewards) {
-                var isActive = (bubbleReward.BubbleTag == _bubbleTag);
-                bubbleReward.gameObject.SetActive(isActive);
-
-                if ( isActive ) {
-                    ActiveBubbleReward = bubbleReward;
-                }
-            }
-        }
-
+       
         private void OnValidate() {
             if ( Application.isPlaying ) {
                 return;
@@ -112,6 +90,27 @@ namespace GameProcess {
             UpdateBubbleReward();
             Rigidbody = GetComponent<Rigidbody2D>();
             _init = true;
+        }
+
+        public void SetBubbleTag(BubbleTags tag) {
+            _bubbleTag = tag;
+        }
+
+        public void UpdateBubbleReward() {
+            foreach (var bubbleReward in _bubbleRewards) {
+                var isActive = (bubbleReward.BubbleTag == _bubbleTag);
+                bubbleReward.gameObject.SetActive(isActive);
+
+                if ( isActive ) {
+                    ActiveBubbleReward = bubbleReward;
+                }
+            }
+        }
+
+        public void RandomUpdateBubbleReward() {
+            var tag = Bubble.GetRandomBubbleTags();
+            SetBubbleTag(tag);
+            UpdateBubbleReward();
         }
 
         public bool CheckConnectedBubble(Bubble bubble) {
@@ -212,10 +211,6 @@ namespace GameProcess {
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
         }
 
-        public void PlayStayAnimation() {
-            _animator.Play(STAY_ANIMATION_NAME);
-        }
-
         void PlayReward() {
             if ( !ActiveBubbleReward ) {
                 return;
@@ -243,19 +238,20 @@ namespace GameProcess {
             return count;
         }
 
+        //вызывается в Animation Events
         public void DeactivateBetweenAnimation() {
             if ( !IsDeactivate ) {
                 return;
             }
 
-            // gameObject.SetActive(false);
             Destroy(gameObject);
         }
 
-        public static BubbleTags GetRandomBubbleTags() {
-            var count = Enum.GetNames(typeof(BubbleTags)).Length;
-            var rand = UnityEngine.Random.Range(1, count);
-            return (BubbleTags)rand;
+        public Bubble CopyBubble() {
+            var copyBubble = Instantiate(this, transform.parent);
+            copyBubble.name = "Bubble" + "[copy]";
+            
+            return copyBubble;
         }
 
         static void RecursiveDeactivateConnectedBubbles(List<Bubble> bubbles) {

@@ -103,6 +103,7 @@ namespace GameProcess {
             } else if ( other.gameObject.CompareTag("Bubble") ) {
                 Rigidbody.velocity = Vector2.zero;
                 Rigidbody.gravityScale = -1;
+                Rigidbody.angularDrag = 0.05f;
                 Force = 0;
             }
             

@@ -51,14 +51,18 @@ namespace GameProcess {
         }
 
         void DrawDefaultAndReflectLine(RaycastHit2D raycastHit) {
-            var countDefaultPoints = CountPointsBetweenPositions(_startTransform.position, raycastHit.point);
+            var direction = GetDirection(raycastHit.point, _startTransform.position);
+            var offset = -direction * 0.25f;
+            var raycastPoint = raycastHit.point + offset;
+            
+            var countDefaultPoints = CountPointsBetweenPositions(_startTransform.position, raycastPoint);
             DrawDefaultLine(countDefaultPoints);
             
-            var reflectDir = Vector2.Reflect(transform.up, raycastHit.normal);
+            var reflectDir = Vector2.Reflect(direction, raycastHit.normal);
             var indexPointReflect = 0;
             for (var i = countDefaultPoints; i < _points.Count; i++) {
-                var pointPosition = raycastHit.point;
-                pointPosition += reflectDir * _distanceBetweenPoints * indexPointReflect;
+                var pointPosition = raycastPoint;
+                pointPosition += reflectDir.normalized * _distanceBetweenPoints * indexPointReflect;
 
                 _points[i].position = pointPosition;
                 _points[i].up = Vector2.up;
@@ -66,6 +70,10 @@ namespace GameProcess {
                 
                 indexPointReflect ++;
             }
+        }
+
+        public Vector2 GetDirection(Vector2 point1, Vector2 point2) {
+            return (point1 - point2);
         }
 
         public bool IsDrawReflectLine(RaycastHit2D raycastHit) {

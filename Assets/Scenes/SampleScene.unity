@@ -3548,7 +3548,7 @@ MonoBehaviour:
   _point: {fileID: 1480349112}
   _startTransform: {fileID: 1304768141}
   _distanceBetweenPoints: 0.3
-  _maxCountPoints: 13
+  _maxCountPoints: 14
 --- !u!1001 &942952339
 PrefabInstance:
   m_ObjectHideFlags: 0

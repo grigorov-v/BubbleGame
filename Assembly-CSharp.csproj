@@ -74,11 +74,13 @@
      <Compile Include="Assets\Scripts\Core\Events\Events.cs" />
      <Compile Include="Assets\Scripts\Core\Events\Handler.cs" />
      <Compile Include="Assets\Scripts\Core\Events\HandlerBase.cs" />
+     <Compile Include="Assets\Scripts\Core\Utils\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\Core\Utils\SingleInstance.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\Bubble.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\BubbleReward.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
+     <Compile Include="Assets\Scripts\GameProcess\ScoreTable.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Projects/BubbleGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

@@ -214,14 +214,14 @@ namespace GameProcess {
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
         }
 
-        void PlayReward() {
+        void PlayRewardEffect() {
             if ( !ActiveBubbleReward ) {
                 return;
             }
 
+            var endPosAnim = ScoreTable.Instance.PointForRewardAnimation.position;
             ActiveBubbleReward.transform.SetParent(null);
-            ActiveBubbleReward.SetDefaultColor();
-            ActiveBubbleReward.gameObject.AddComponent<Rigidbody2D>();
+            ActiveBubbleReward.PlayRefwardAnimation(endPosAnim);
         }
 
         int GetCountConnectedBubbles() {
@@ -241,11 +241,13 @@ namespace GameProcess {
             return count;
         }
 
-        //вызывается в Animation Events
+        //Вызывается в Animation Events
         public void DeactivateBetweenAnimation() {
             if ( !IsDeactivate ) {
                 return;
             }
+
+            PlayRewardEffect();
 
             Destroy(gameObject);
         }

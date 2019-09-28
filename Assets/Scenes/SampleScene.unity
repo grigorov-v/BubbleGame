@@ -1363,17 +1363,17 @@ PrefabInstance:
     - target: {fileID: 7220647496043804025, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: _bubbleTag
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8866986789476692667, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7456988430396097771, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c2c5e54be3af4891857d610b164c7, type: 3}
@@ -1924,12 +1924,17 @@ PrefabInstance:
     - target: {fileID: 7220647496043804025, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: _bubbleTag
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220647496043804025, guid: 0b2c2c5e54be3af4891857d610b164c7,
+        type: 3}
+      propertyPath: _bombRadius
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8866986789476692667, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 699123217272389061, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
@@ -1939,7 +1944,7 @@ PrefabInstance:
     - target: {fileID: 7456988430396097771, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c2c5e54be3af4891857d610b164c7, type: 3}

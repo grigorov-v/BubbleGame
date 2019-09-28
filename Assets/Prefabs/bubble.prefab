@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf925f493b076443912b6878c5c468e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 1
+  _bubbleTag: 3
   _bubbleRewards:
   - {fileID: 6354846126958482232}
   - {fileID: 8104311684585761637}
@@ -1379,6 +1379,7 @@ MonoBehaviour:
   - {fileID: 7981907040575949920}
   - {fileID: 6843154463312051372}
   - {fileID: 8520692303153278668}
+  _bombRadius: 1
 --- !u!95 &2965543232968983126
 Animator:
   serializedVersion: 3
@@ -1508,7 +1509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3861323680586139001
 Transform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5378153497054924268
 Transform:
   m_ObjectHideFlags: 0

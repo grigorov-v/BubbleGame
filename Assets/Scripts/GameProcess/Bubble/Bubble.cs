@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 
 using Core.Events;
+using NaughtyAttributes;
 
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
@@ -12,6 +13,9 @@ namespace GameProcess {
 
         [SerializeField] BubbleTags         _bubbleTag     = BubbleTags.None;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
+
+        [SerializeField] [HideIf("IsHideBombRadius")]
+        float _bombRadius = 1;
 
         List<Bubble> _connectedBubbles = new List<Bubble>();
         Animator     _animator         = null;
@@ -23,6 +27,10 @@ namespace GameProcess {
 
         public bool         BubbleFromGun      {get; set;}
         public float        Force              {get; set;}
+
+        bool IsHideBombRadius() {
+            return _bubbleTag != BubbleTags.Bomb;
+        }
 
         static void AddToCache(GameObject key, Bubble bubble) {
             if ( CacheBubbles == null ) {
@@ -210,6 +218,22 @@ namespace GameProcess {
 
             IsDeactivate = true;
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
+
+            if ( _bubbleTag == BubbleTags.Bomb ) {
+                PlayBomb();
+            }
+        }
+
+        void PlayBomb() {
+            foreach (var item in CacheBubbles) {
+                var bubble = item.Value;
+                var dist = Vector2.Distance(transform.position, bubble.transform.position);
+                if ( (dist > _bombRadius) || (bubble == this) ) {
+                    continue;
+                }
+
+                bubble.PlayDeactivateAnimation();
+            }
         }
 
         void PlayRewardEffect() {
@@ -274,6 +298,15 @@ namespace GameProcess {
                 bub.PlayDeactivateAnimation();
                 RecursiveDeactivateConnectedBubbles(bub._connectedBubbles);
             }
+        }
+
+        private void OnDrawGizmosSelected() {
+            if ( _bubbleTag != BubbleTags.Bomb ) {
+                return;
+            }
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _bombRadius);
         }
     }
 }

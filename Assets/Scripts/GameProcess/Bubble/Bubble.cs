@@ -61,7 +61,6 @@ namespace GameProcess {
             var rand = UnityEngine.Random.Range(1, count);
             return (BubbleTags)rand;
         }
-
        
         private void OnValidate() {
             if ( Application.isPlaying ) {
@@ -111,7 +110,6 @@ namespace GameProcess {
             EventManager.Fire(new PostBubbleCollision(this, other));
         }
 
-
         public void Init() {
             if ( _init ) {
                 return;
@@ -124,7 +122,7 @@ namespace GameProcess {
             Rigidbody = GetComponent<Rigidbody2D>();
             _init = true;
         }
-
+        
         public void SetBubbleTag(BubbleTags tag) {
             _bubbleTag = tag;
         }

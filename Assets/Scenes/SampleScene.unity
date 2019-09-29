@@ -3187,7 +3187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58617fe65f1d8740a40ae8db36a52ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 10
+  _force: 30
   _bubblesCenter: {fileID: 798644637}
   _body: {fileID: 663557689}
   _lerpMove: 10

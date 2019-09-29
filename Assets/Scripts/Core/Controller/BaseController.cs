@@ -1,22 +1,12 @@
 ﻿namespace Core.Controller {
-    public class BaseController<T>: IController where T: new() {
+    public class BaseController<T>: IController where T: class, IController {
         public static T Instance {get; private set;}
 
         public virtual void Init() {
-            if (Instance != null) {
-                return;
-            }
-
-            Instance = new T();
+            Instance = (Instance == null) ? this as T : Instance;
         }
 
-        public virtual void Load() {
-        }
-
-        public virtual void PostLoad() { 
-        }
-
-        public virtual void Save() {
+        public virtual void PostInit() { 
         }
     }
 }

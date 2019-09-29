@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Controller {
+using Core.Controller;
+
+namespace Controllers {
     public class ControllersInitializer : MonoBehaviour {
         List<IController> _controllersRegister = new List<IController>(){
-            //new MainController()
+            new ConfigsController()
         };
 
         private void Awake() {
-            foreach (var controller in _controllersRegister) {
-                controller.Init();
-            }
+            _controllersRegister.ForEach(controller => controller.Init());
+            _controllersRegister.ForEach(controller => controller.PostInit());
         }
     }
 }

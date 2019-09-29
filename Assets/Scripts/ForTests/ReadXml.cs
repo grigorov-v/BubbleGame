@@ -25,8 +25,8 @@ public class Config: IConfigElement {
     public string Tag   = string.Empty;
 
     public void Load(XmlNode node) {
-        Layer = node.GetAttributeValue("layer", 0);
-        Tag   = node.GetAttributeValue("tag", string.Empty);
+        Layer = node.GetAttrValue("layer", 0);
+        Tag   = node.GetAttrValue("tag", string.Empty);
     }
 }
 

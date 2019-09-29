@@ -76,7 +76,10 @@
      <Compile Include="Assets\Scripts\Core\Events\HandlerBase.cs" />
      <Compile Include="Assets\Scripts\Core\Singleton\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\Core\Singleton\SingleInstance.cs" />
-     <Compile Include="Assets\Scripts\Core\XML\XmlHelper.cs" />
+     <Compile Include="Assets\Scripts\Core\Time\TimeUtils.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\XmlNodeExtensions.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\XmlNodeSaveable.cs" />
      <Compile Include="Assets\Scripts\ForTests\ButtonReload.cs" />
      <Compile Include="Assets\Scripts\ForTests\ReadXml.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\Bubble.cs" />

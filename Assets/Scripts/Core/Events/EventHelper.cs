@@ -81,7 +81,7 @@ namespace Core.Events {
 				EventManager.Instance.CleanUp();
 				_cleanupTimer = 0;
 			} else {
-				_cleanupTimer += Time.deltaTime;
+				_cleanupTimer += UnityEngine.Time.deltaTime;
 			}
 		}
 

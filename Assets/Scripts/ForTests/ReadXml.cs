@@ -9,8 +9,9 @@ using Core.XML;
 using NaughtyAttributes;
 
 using Controllers;
+using Configs;
 
-public class TestConfig: BaseXmlNodeLoadable {
+public class TestConfig: IConfig {
     public int    Layer = 0;
     public string Tag   = string.Empty;
 
@@ -21,8 +22,16 @@ public class TestConfig: BaseXmlNodeLoadable {
 }
 
 public class ReadXml : MonoBehaviour {
-    private void Start() {
-        var config = ConfigsController.Instance.FindXmlConfig<TestConfig>();
-        Debug.Log(config.Tag);
+    [Button("REad")]
+    private void Read() {
+        var config = ConfigsController.Instance.FindConfig<LevelConfig>();
+
+        Debug.LogFormat("Levels count {0}", config.Levels.Count);
+
+        foreach (var level in config.Levels) {
+            foreach (var bubble in level.Bubbles) {
+                Debug.Log(bubble.Tag);
+            }
+        }
     }
 }

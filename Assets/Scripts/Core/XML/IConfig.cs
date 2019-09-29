@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace Core.XML {
-	public interface BaseXmlNodeLoadable {
+	public interface IConfig {
 		void Load(XmlNode node);
 	}
 }

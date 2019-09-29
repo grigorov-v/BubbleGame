@@ -3,24 +3,39 @@ using System.Collections.Generic;
 using System.Xml;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using Core.Controller;
 using Core.XML;
 
+using Configs;
+
 namespace Controllers {
     public struct XmlLoadableInfo {
-        public BaseXmlNodeLoadable Config;
+        public IConfig Config;
         public string AssetPath;
         public string NodeName;
 
+        public string InitAssetPath() {
+            var path = AssetPath;
+
+            if ( path.IndexOf("{SceneName}") != -1 ) {
+                var sceneName = SceneManager.GetActiveScene().name;
+                path = path.Replace("{SceneName}", sceneName);
+            }
+
+            return path;
+        }
+
         public void LoadXml() {
+            AssetPath = InitAssetPath();
             var xmlAsset = Resources.Load(AssetPath) as TextAsset;
 
             var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlAsset.text);
 
             var root = xmlDoc.DocumentElement;
-            var node = root[NodeName] as XmlNode;
+            var node = (NodeName == "root") ? (root as XmlNode) : (root[NodeName] as XmlNode);
 
             Config.Load(node);
         }
@@ -29,9 +44,9 @@ namespace Controllers {
     public class ConfigsController : BaseController<ConfigsController> {
         List<XmlLoadableInfo> _xmlLoadableInfoList = new List<XmlLoadableInfo>() {
             new XmlLoadableInfo() {
-                Config    = new TestConfig(),
-                AssetPath = "Configs/LevelConfig",
-                NodeName  = "bubble"
+                Config    = new LevelConfig(),
+                AssetPath = "Configs/{SceneName}_LevelConfig",
+                NodeName  = "root"
             }   
         };
 
@@ -39,7 +54,7 @@ namespace Controllers {
             _xmlLoadableInfoList.ForEach(info => info.LoadXml());
         }
 
-        public T FindXmlConfig<T>() where T: class, BaseXmlNodeLoadable {
+        public T FindConfig<T>() where T: class, IConfig {
             foreach (var xmlLoadableInfo in _xmlLoadableInfoList) {
                 var check = (xmlLoadableInfo.Config is T);
                 if ( !check ) {

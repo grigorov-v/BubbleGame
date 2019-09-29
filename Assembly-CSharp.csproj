@@ -64,6 +64,7 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+     <Compile Include="Assets\Scripts\Configs\LevelConfig.cs" />
      <Compile Include="Assets\Scripts\Controllers\ConfigsController.cs" />
      <Compile Include="Assets\Scripts\Controllers\ControllersInitializer.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\BaseController.cs" />
@@ -77,7 +78,7 @@
      <Compile Include="Assets\Scripts\Core\Singleton\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\Core\Singleton\SingleInstance.cs" />
      <Compile Include="Assets\Scripts\Core\Time\TimeUtils.cs" />
-     <Compile Include="Assets\Scripts\Core\XML\BaseXmlNodeLoadable.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\IConfig.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeExtensions.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
      <Compile Include="Assets\Scripts\ForTests\ButtonReload.cs" />
@@ -88,7 +89,7 @@
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
      <Compile Include="Assets\Scripts\GameProcess\ScoreTable.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\Resources\Configs\LevelConfig.xml" />
+     <None Include="Assets\Resources\Configs\CandyWorld_LevelConfig.xml" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Projects/BubbleGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

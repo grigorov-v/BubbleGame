@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <!-- Level 1 -->
+    <level>
+        <bubbles>
+            <bubble layer="0" tag="bomb"/>
+            <bubble layer="0" tag="bomb2"/>
+        </bubbles>
+    </level>
+
+    <!-- Level 2 -->
+    <level>
+        <bubbles>
+            <bubble layer="0" tag="bomb3"/>
+            <bubble layer="0" tag="bomb4"/>
+        </bubbles>
+    </level>
+</root>

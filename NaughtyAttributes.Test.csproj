@@ -57,23 +57,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Buttons.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Dropdowns.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\EnableDisableIf.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\InfoBoxes.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Label.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\NaughtyComponent.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\NaughtyScriptableObject.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\NonSerializedProperties.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\OnValueChanged.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\ProgressBar.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\ReadOnly.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\ReorderableLists.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\ShowAssetPreview.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\ShowHideIf.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Sliders.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Tag.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\NaughtyAttributes\Scripts\Test\Validation.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Buttons.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Dropdowns.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\EnableDisableIf.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\InfoBoxes.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Label.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\NaughtyComponent.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\NaughtyScriptableObject.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\NonSerializedProperties.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\OnValueChanged.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\ProgressBar.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\ReadOnly.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\ReorderableLists.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\ShowAssetPreview.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\ShowHideIf.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Sliders.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Tag.cs" />
+     <Compile Include="Assets\Scripts\Core\NaughtyAttributes\Scripts\Test\Validation.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>

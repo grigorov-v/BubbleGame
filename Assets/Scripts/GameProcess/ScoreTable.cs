@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Core.Utils;
+using Core.Singleton;
 
 namespace GameProcess {
     public class ScoreTable : MonoSingleton<ScoreTable> {

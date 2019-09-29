@@ -64,6 +64,7 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+     <Compile Include="Assets\Scripts\Core\Configs\IConfigElement.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\BaseController.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\ControllersInitializer.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\IController.cs" />
@@ -73,15 +74,15 @@
      <Compile Include="Assets\Scripts\Core\Events\Events.cs" />
      <Compile Include="Assets\Scripts\Core\Events\Handler.cs" />
      <Compile Include="Assets\Scripts\Core\Events\HandlerBase.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\MonoSingleton.cs" />
-     <Compile Include="Assets\Scripts\Core\Utils\SingleInstance.cs" />
+     <Compile Include="Assets\Scripts\Core\Singleton\MonoSingleton.cs" />
+     <Compile Include="Assets\Scripts\Core\Singleton\SingleInstance.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\XmlHelper.cs" />
      <Compile Include="Assets\Scripts\ForTests\ButtonReload.cs" />
      <Compile Include="Assets\Scripts\ForTests\ReadXml.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\Bubble.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\BubbleReward.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
-     <Compile Include="Assets\Scripts\GameProcess\Configs\IConfig.cs" />
      <Compile Include="Assets\Scripts\GameProcess\ScoreTable.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Resources\Configs\LevelConfig.xml" />

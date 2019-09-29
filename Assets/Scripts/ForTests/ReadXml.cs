@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Xml;
+using Core.XML;
+using Core.Configs;
 
 using NaughtyAttributes;
 
-public class Config: IConfig {
+public class Config: IConfigElement {
     public string AssetPath {
         get {
             return "Configs/LevelConfig";
@@ -23,15 +25,8 @@ public class Config: IConfig {
     public string Tag   = string.Empty;
 
     public void Load(XmlNode node) {
-        var attr = node.Attributes.GetNamedItem("layer");
-        if ( attr != null ) {
-            Layer = int.Parse(attr.Value);
-        }
-
-        attr = node.Attributes.GetNamedItem("tag");
-        if ( attr != null ) {
-            Tag = attr.Value;
-        }
+        Layer = node.GetAttributeValue("layer", 0);
+        Tag   = node.GetAttributeValue("tag", string.Empty);
     }
 }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-using Core.Utils;
+using Core.Singleton;
 
 namespace Core.Events {
 	/// <summary>

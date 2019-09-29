@@ -1,4 +1,4 @@
-namespace Core.Utils {
+namespace Core.Singleton {
 	public abstract class SingleInstance<IT, T> where T : IT, new() {
 		public static T Instance {
 			get { return _instance; }

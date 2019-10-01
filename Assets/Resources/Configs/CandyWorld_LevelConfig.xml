@@ -3,16 +3,21 @@
     <!-- Level 1 -->
     <level>
         <bubbles>
-            <bubble layer="0" tag="bomb"/>
-            <bubble layer="0" tag="bomb2"/>
-        </bubbles>
-    </level>
+            <bubble line="0" column="1" tag="Lemon"/>
+            <bubble line="0" column="2" tag="Bomb"/>
+            <bubble line="0" column="3" tag="Bomb"/>
+            <bubble line="0" column="4" tag="Lemon"/>
+            <bubble line="0" column="5" tag="PurpleLollipop"/>
+            <bubble line="0" column="6" tag="Bomb"/>
+            <bubble line="0" column="8" tag="PurpleLollipop"/>
 
-    <!-- Level 2 -->
-    <level>
-        <bubbles>
-            <bubble layer="0" tag="bomb3"/>
-            <bubble layer="0" tag="bomb4"/>
+            <bubble line="1" column="1" tag="PurpleLollipop"/>
+            <bubble line="1" column="2" tag="Bomb"/>
+            <bubble line="1" column="3" tag="PurpleLollipop"/>
+            <bubble line="1" column="4" tag="Lemon"/>
+            <bubble line="1" column="5" tag="PurpleLollipop"/>
+            <bubble line="1" column="6" tag="Bomb"/>
+            <bubble line="1" column="8" tag="PurpleLollipop"/>
         </bubbles>
     </level>
 </root>

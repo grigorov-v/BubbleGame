@@ -70,10 +70,6 @@ namespace GameProcess {
                 return;
             }
 
-            if ( !e.Collision.gameObject.CompareTag("Bubble") ) {
-                return;
-            }
-
             ReloadBubble();
         }
     }

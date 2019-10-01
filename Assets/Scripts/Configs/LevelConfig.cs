@@ -7,12 +7,14 @@ using Core.XML;
 
 namespace Configs {
     public class BubbleInfo: XmlNodeLoadable<BubbleInfo> {
-        public int    Layer {get; private set;}
-        public string Tag   {get; private set;}
+        public int    Line   {get; private set;}
+        public int    Column {get; private set;}
+        public string Tag    {get; private set;}
 
         public BubbleInfo Load(XmlNode node) {
-            Layer = node.GetAttrValue("layer", 0);
-            Tag   = node.GetAttrValue("tag", string.Empty);
+            Line   = node.GetAttrValue("line", 0);
+            Column = node.GetAttrValue("column", 0);
+            Tag    = node.GetAttrValue("tag", string.Empty);
             return this;
         }
     }

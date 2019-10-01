@@ -11,7 +11,7 @@ namespace GameProcess {
 
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
-        [SerializeField] BubbleTags         _bubbleTag     = BubbleTags.None;
+        [SerializeField] string             _bubbleTag     = string.Empty;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
 
         [SerializeField] [HideIf("IsHideBombRadius")]
@@ -29,7 +29,7 @@ namespace GameProcess {
         public float        Force              {get; set;}
 
         bool IsHideBombRadius() {
-            return _bubbleTag != BubbleTags.Bomb;
+            return _bubbleTag != "Bomb";
         }
 
         static void AddToCache(GameObject key, Bubble bubble) {
@@ -107,7 +107,7 @@ namespace GameProcess {
                 newDir = other.transform.right;
             } else if ( other.gameObject.CompareTag("RightWall") ) {
                 newDir = -other.transform.right;
-            } else if ( other.gameObject.CompareTag("Bubble") ) {
+            } else if ( other.gameObject.CompareTag("Bubble") || other.gameObject.CompareTag("TopWall") ) {
                 Rigidbody.velocity = Vector2.zero;
                 Rigidbody.gravityScale = -1;
                 Rigidbody.angularDrag = 0.05f;
@@ -131,7 +131,7 @@ namespace GameProcess {
             _init = true;
         }
         
-        public void SetBubbleTag(BubbleTags tag) {
+        public void SetBubbleTag(string tag) {
             _bubbleTag = tag;
         }
 
@@ -147,9 +147,9 @@ namespace GameProcess {
         }
 
         public void RandomUpdateBubbleReward() {
-            var tag = Bubble.GetRandomBubbleTags();
-            SetBubbleTag(tag);
-            UpdateBubbleReward();
+            // var tag = Bubble.GetRandomBubbleTags();
+            // SetBubbleTag(tag);
+            // UpdateBubbleReward();
         }
 
         public bool CheckConnectedBubble(Bubble bubble) {
@@ -219,7 +219,7 @@ namespace GameProcess {
             IsDeactivate = true;
             _animator.Play(DEACTIVATE_ANIMATION_NAME);
 
-            if ( _bubbleTag == BubbleTags.Bomb ) {
+            if ( _bubbleTag == "Bomb" ) {
                 PlayBomb();
             }
         }
@@ -301,7 +301,7 @@ namespace GameProcess {
         }
 
         private void OnDrawGizmosSelected() {
-            if ( _bubbleTag != BubbleTags.Bomb ) {
+            if ( _bubbleTag != "Bomb" ) {
                 return;
             }
 

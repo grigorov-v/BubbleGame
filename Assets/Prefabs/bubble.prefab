@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 15
+  _bubbleTag: StripedLollipop
 --- !u!1 &699123217272389061
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 7
+  _bubbleTag: WhiteLollipop
 --- !u!1 &1163914410797120899
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 11
+  _bubbleTag: "\u041Erange\u0421andy"
 --- !u!1 &1322395415318056352
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 10
+  _bubbleTag: "Red\u0421andy"
 --- !u!1 &1720700043951451021
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 14
+  _bubbleTag: Lightning
 --- !u!1 &1942463678341605791
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 18
+  _bubbleTag: CaramelLollipop
 --- !u!1 &2047587770111477082
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 5
+  _bubbleTag: PinkLollipop
 --- !u!1 &2169220666526510254
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 12
+  _bubbleTag: "\u0421herry\u0421andy"
 --- !u!1 &2380614068477235820
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 2
+  _bubbleTag: PurpleLollipop
 --- !u!1 &2713955851941769273
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 13
+  _bubbleTag: BluePop
 --- !u!1 &3754285714563186037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 6
+  _bubbleTag: BlueLollipop
 --- !u!1 &4245816289261407438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 17
+  _bubbleTag: Clock
 --- !u!1 &4387115944732550707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 16
+  _bubbleTag: Cake
 --- !u!1 &4703416746777178335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf925f493b076443912b6878c5c468e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 3
+  _bubbleTag: Bomb
   _bubbleRewards:
   - {fileID: 6354846126958482232}
   - {fileID: 8104311684585761637}
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 9
+  _bubbleTag: Star
 --- !u!1 &7456988430396097771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 3
+  _bubbleTag: Bomb
 --- !u!1 &7625150023373707801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 4
+  _bubbleTag: Heart
 --- !u!1 &8520328005033121965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 8
+  _bubbleTag: GreenLollipop
 --- !u!1 &8866986789476692667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,4 +1911,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d303474778612b4e9a86038943dfa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubbleTag: 1
+  _bubbleTag: Lemon

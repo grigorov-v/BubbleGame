@@ -30,12 +30,12 @@ namespace GameProcess {
     public class BubbleReward : MonoBehaviour {
         const float FREEZE_ALPHA = 0.7f;
 
-        [SerializeField] BubbleTags _bubbleTag = BubbleTags.None;
+        [SerializeField] string _bubbleTag = string.Empty;
 
         SpriteRenderer _renderer = null;
         Tween          _tween    = null;
 
-        public BubbleTags BubbleTag {
+        public string BubbleTag {
             get {
                 return _bubbleTag;
             }

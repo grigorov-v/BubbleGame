@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 using Core.Events;
+
+using Controllers;
+using Configs;
 
 namespace GameProcess {
     public class BubblesGun : MonoBehaviour {
@@ -13,8 +17,21 @@ namespace GameProcess {
         [SerializeField] Bubble             _lastBubble    = null;
         [SerializeField] BubbleGunIndicator _indicator     = null;
 
+        List<BubbleInfo> _allBubblesInfoForGun = null;
+        int              _currentBubbleIndex   = -1;
+
         private void Start() {
             EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
+
+            var levelInfo = ConfigsController.Instance.GetLevelInfo(0);
+            _allBubblesInfoForGun = levelInfo.BubblesForGun;
+
+            var newTag = GetNewBubbleTag();
+            if ( String.IsNullOrEmpty(newTag) ) {
+                return;
+            }
+            _lastBubble.SetBubbleTag(newTag);
+            _lastBubble.UpdateBubbleReward();
         }
 
         private void OnDestroy() {
@@ -43,6 +60,10 @@ namespace GameProcess {
         }
 
         void Shot() {
+            if ( !_lastBubble ) {
+                return;
+            }
+            
             _lastBubble.Rigidbody.simulated = true;
             _lastBubble.Rigidbody.gravityScale = 0;
             _lastBubble.Rigidbody.angularDrag = 0;
@@ -54,15 +75,36 @@ namespace GameProcess {
             _lastBubble.Rigidbody.AddForce(_bubblesCenter.up * _force, ForceMode2D.Impulse);
         }
 
-        void ReloadBubble() {
-            _lastBubble = _lastBubble.CopyBubble();//Когда будет ограниченное кол-во, брать из пула
+        void ReloadGun() {
+            var newTag = GetNewBubbleTag();
+            if ( String.IsNullOrEmpty(newTag) ) {
+                _lastBubble = null;
+                return;
+            }
 
+            _lastBubble = _lastBubble.CopyBubble();
             _lastBubble.Init();
             _lastBubble.transform.SetParent(_bubblesCenter);
             _lastBubble.transform.localPosition = Vector2.zero;
             _lastBubble.Rigidbody.simulated = false;
             _lastBubble.Force = 0;
-            _lastBubble.RandomUpdateBubbleReward();
+
+            _lastBubble.SetBubbleTag(newTag);
+            _lastBubble.UpdateBubbleReward();
+        }
+
+        string GetNewBubbleTag() {
+            if ( (_allBubblesInfoForGun == null) || (_allBubblesInfoForGun.Count == 0) ) {
+                return null;
+            }
+
+            if ( _currentBubbleIndex >= (_allBubblesInfoForGun.Count - 1) ) {
+                return null;
+            }
+
+            _currentBubbleIndex ++;
+            var tag = _allBubblesInfoForGun[_currentBubbleIndex].Tag;
+            return tag;
         }
 
         void OnPostBubbleCollision(PostBubbleCollision e) {
@@ -70,7 +112,7 @@ namespace GameProcess {
                 return;
             }
 
-            ReloadBubble();
+            ReloadGun();
         }
     }
 }

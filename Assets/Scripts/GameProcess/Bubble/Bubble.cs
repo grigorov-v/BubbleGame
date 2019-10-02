@@ -157,12 +157,6 @@ namespace GameProcess {
             }
         }
 
-        public void RandomUpdateBubbleReward() {
-            var tag = Bubble.GetRandomBubbleTag();
-            SetBubbleTag(tag);
-            UpdateBubbleReward();
-        }
-
         public bool CheckConnectedBubble(Bubble bubble) {
             return _connectedBubbles.IndexOf(bubble) != -1;
         }

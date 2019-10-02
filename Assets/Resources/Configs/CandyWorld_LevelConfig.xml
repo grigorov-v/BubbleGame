@@ -19,5 +19,15 @@
             <bubble tag="Bomb"/>
             <bubble tag="PurpleLollipop"/>
         </bubbles>
+
+        <bubbles_for_gun>
+            <bubble tag="PurpleLollipop"/>
+            <bubble tag="Bomb"/>
+            <bubble tag="PurpleLollipop"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="PurpleLollipop"/>
+            <bubble tag="Bomb"/>
+            <bubble tag="PurpleLollipop"/>
+        </bubbles_for_gun>
     </level>
 </root>

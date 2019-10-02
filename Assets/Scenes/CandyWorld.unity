@@ -414,15 +414,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1946177771937502784, guid: 0b2c2c5e54be3af4891857d610b164c7,
-        type: 3}
-      propertyPath: m_Simulated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2380614068477235820, guid: 0b2c2c5e54be3af4891857d610b164c7,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946177771937502784, guid: 0b2c2c5e54be3af4891857d610b164c7,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c2c5e54be3af4891857d610b164c7, type: 3}
@@ -9958,7 +9958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bubble: {fileID: 2039411928}
   _startPoint: {fileID: 369952395}
-  _horizontalCount: 8
+  _columnCount: 8
 --- !u!1 &1623196616
 GameObject:
   m_ObjectHideFlags: 0
@@ -9969,7 +9969,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1623196617}
   - component: {fileID: 1623196618}
-  - component: {fileID: 1623196619}
   m_Layer: 0
   m_Name: =ControllersInitializer=
   m_TagString: Untagged
@@ -10001,18 +10000,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47cb4fe8900f7e947836f4260eea7d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1623196619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623196616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc2e37b8f8e66404caaabb7cb02fc321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1647901347

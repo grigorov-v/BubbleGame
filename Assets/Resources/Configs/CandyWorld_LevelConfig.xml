@@ -6,7 +6,7 @@
             <bubble tag="Lemon"/>
         </bubbles>
 
-        <bubbles_for_gun>
+        <bubbles_for_gun last_generate_count="3">
             <bubble tag="Lemon"/>
             <bubble tag="Lemon"/>
         </bubbles_for_gun>

@@ -15,12 +15,16 @@ namespace Configs {
     }
 
     public class LevelInfo: XmlNodeLoadable<LevelInfo> {
-        public List<BubbleInfo> Bubbles       {get; private set;}
-        public List<BubbleInfo> BubblesForGun {get; private set;}
+        public List<BubbleInfo> Bubbles           {get; private set;}
+        public List<BubbleInfo> BubblesForGun     {get; private set;}
+        public int              LastGenerateCount {get; private set;}
 
         public LevelInfo Load(XmlNode node) {
-            Bubbles       = node.LoadNodeList("bubbles", "bubble",  index => new BubbleInfo());
-            BubblesForGun = node.LoadNodeList("bubbles_for_gun", "bubble",  index => new BubbleInfo());
+            Bubbles           = node.LoadNodeList("bubbles", "bubble",  index => new BubbleInfo());
+            BubblesForGun     = node.LoadNodeList("bubbles_for_gun", "bubble",  index => new BubbleInfo());
+            
+            var nodeBubblesForGun = node.SelectFirstNode("bubbles_for_gun");
+            LastGenerateCount = (nodeBubblesForGun != null) ? nodeBubblesForGun.GetAttrValue("last_generate_count", 0) : 0;
             return this;
         }
     }

@@ -30,6 +30,12 @@ namespace GameProcess {
         public bool         BubbleFromGun      {get; set;}
         public float        Force              {get; set;}
 
+        public string BubbleTag {
+            get {
+                return _bubbleTag;
+            }
+        }
+
         bool IsHideBombRadius() {
             return _bubbleTag != "Bomb";
         }

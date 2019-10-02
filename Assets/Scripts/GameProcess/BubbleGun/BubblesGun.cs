@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace GameProcess {
 
         List<BubbleInfo> _allBubblesInfoForGun = null;
         int              _currentBubbleIndex   = -1;
+        int              _lastGenerateCount    = 0;
 
         private void Start() {
             EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
@@ -32,6 +34,8 @@ namespace GameProcess {
             }
             _lastBubble.SetBubbleTag(newTag);
             _lastBubble.UpdateBubbleReward();
+
+            _lastGenerateCount = levelInfo.LastGenerateCount;
         }
 
         private void OnDestroy() {
@@ -77,6 +81,8 @@ namespace GameProcess {
 
         void ReloadGun() {
             var newTag = GetNewBubbleTag();
+            newTag = String.IsNullOrEmpty(newTag) ? GetNewBubbleFromScene() : newTag;
+
             if ( String.IsNullOrEmpty(newTag) ) {
                 _lastBubble = null;
                 return;
@@ -105,6 +111,26 @@ namespace GameProcess {
             _currentBubbleIndex ++;
             var tag = _allBubblesInfoForGun[_currentBubbleIndex].Tag;
             return tag;
+        }
+
+        string GetNewBubbleFromScene() {
+            if ( _lastGenerateCount == 0 ) {
+                return null;
+            }
+
+            if ( Bubble.CacheBubbles.Count == 0 ) {
+                return null;
+            }
+
+            _lastGenerateCount --;
+
+            foreach (var itemCache in Bubble.CacheBubbles) {
+                if ( itemCache.Value != _lastBubble ) {
+                    return itemCache.Value.BubbleTag;
+                }
+            }
+
+            return null;
         }
 
         void OnPostBubbleCollision(PostBubbleCollision e) {

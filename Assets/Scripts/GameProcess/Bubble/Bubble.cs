@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 using Core.Events;
+using Configs;
+using Controllers;
 using NaughtyAttributes;
 
 namespace GameProcess {
@@ -64,10 +66,19 @@ namespace GameProcess {
             return CacheBubbles[key];
         }
 
-        public static BubbleTags GetRandomBubbleTags() {
-            var count = Enum.GetNames(typeof(BubbleTags)).Length;
-            var rand = UnityEngine.Random.Range(1, count);
-            return (BubbleTags)rand;
+        public static string GetRandomBubbleTag() {
+            var levelInfo = ConfigsController.Instance.GetLevelInfo(0);
+            if ( levelInfo == null ) {
+                return string.Empty;
+            }
+
+            var bubbles = levelInfo.Bubbles;
+            if ( bubbles == null ) {
+                return string.Empty;
+            }
+
+            var rand = Random.Range(0, bubbles.Count);
+            return bubbles[rand].Tag;
         }
        
         private void OnValidate() {
@@ -147,9 +158,9 @@ namespace GameProcess {
         }
 
         public void RandomUpdateBubbleReward() {
-            // var tag = Bubble.GetRandomBubbleTags();
-            // SetBubbleTag(tag);
-            // UpdateBubbleReward();
+            var tag = Bubble.GetRandomBubbleTag();
+            SetBubbleTag(tag);
+            UpdateBubbleReward();
         }
 
         public bool CheckConnectedBubble(Bubble bubble) {

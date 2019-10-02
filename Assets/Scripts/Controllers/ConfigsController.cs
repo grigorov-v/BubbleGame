@@ -66,5 +66,19 @@ namespace Controllers {
 
             return null;
         }
+
+        public LevelInfo GetLevelInfo(int levelIndex) {
+            var levelConfig = FindConfig<LevelConfig>();
+            if ( levelConfig == null ) {
+                return null;
+            }
+
+            var levels = levelConfig.Levels;
+            if ( (levels == null) || (levelIndex > levels.Count - 1) ) {
+                return null;
+            }
+
+            return levels[levelIndex];
+        }
     } 
 }

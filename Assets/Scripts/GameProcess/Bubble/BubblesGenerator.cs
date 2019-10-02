@@ -9,9 +9,9 @@ using Controllers;
 
 namespace GameProcess {
     public class BubblesGenerator : MonoBehaviour {
-        [SerializeField] Bubble    _bubble      = null;
-        [SerializeField] Transform _startPoint  = null;
-        [SerializeField] int       _columnCount = 8;
+        [SerializeField] Bubble    _bubblePrototype = null;
+        [SerializeField] Transform _startPoint      = null;
+        [SerializeField] int       _columnCount     = 8;
 
         private void Start() {
             Generate();
@@ -26,12 +26,12 @@ namespace GameProcess {
             var line = 0;
             foreach (var bubbleInfo in bubbles) {
                 var position = _startPoint.position;
-                var scale = _bubble.transform.localScale;
+                var scale = _bubblePrototype.transform.localScale;
 
                 position.x += scale.x * column;
                 position.y -= scale.y * line;
 
-                var bubble = Instantiate(_bubble, position, _bubble.transform.rotation, _bubble.transform.parent);
+                var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
                 bubble.SetBubbleTag(bubbleInfo.Tag);
                 bubble.UpdateBubbleReward();
 
@@ -43,6 +43,8 @@ namespace GameProcess {
 
                 column ++;
             }
+
+            Destroy(_bubblePrototype.gameObject);
         }
     }
 }

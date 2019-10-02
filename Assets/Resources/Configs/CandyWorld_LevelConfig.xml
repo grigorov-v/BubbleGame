@@ -4,30 +4,11 @@
     <level>
         <bubbles>
             <bubble tag="Lemon"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="PurpleLollipop"/>
-
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="PurpleLollipop"/>
         </bubbles>
 
         <bubbles_for_gun>
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="PurpleLollipop"/>
             <bubble tag="Lemon"/>
-            <bubble tag="PurpleLollipop"/>
-            <bubble tag="Bomb"/>
-            <bubble tag="PurpleLollipop"/>
+            <bubble tag="Lemon"/>
         </bubbles_for_gun>
     </level>
 </root>

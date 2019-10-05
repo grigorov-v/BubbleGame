@@ -82,7 +82,7 @@ namespace GameProcess {
                 return false;
             }
 
-            return collider.CompareTag("LeftWall") || collider.CompareTag("RightWall");
+            return collider.CompareTag(Bubble.TAG_WALL);
         }
 
         int CountPointsBetweenPositions(Vector2 pos1, Vector2 pos2) {

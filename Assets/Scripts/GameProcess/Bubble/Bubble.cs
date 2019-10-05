@@ -9,12 +9,11 @@ using NaughtyAttributes;
 
 namespace GameProcess {
     public class Bubble : MonoBehaviour {
+        public const string TAG_WALL  = "Wall";
+        
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
-
-        const string TAG_LEFT_WALL             = "LeftWall"; 
-        const string TAG_RIGHT_WALL            = "RightWall";
-        const string TAG_TOP_WALL              = "TopWall"; 
-
+        const string TAG_TOP_WALL              = "TopWall";
+        
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
         [SerializeField] string             _bubbleTag     = string.Empty;
@@ -125,11 +124,10 @@ namespace GameProcess {
 
         private void OnCollisionEnter2D(Collision2D other) {
             var newDir = Vector2.zero;
+            var contactPoint = other.GetContact(0);
 
-            if ( other.gameObject.CompareTag(TAG_LEFT_WALL) ) {
-                newDir = other.transform.right;
-            } else if ( other.gameObject.CompareTag(TAG_RIGHT_WALL) ) {
-                newDir = -other.transform.right;
+            if ( other.gameObject.CompareTag(TAG_WALL) ) {
+                newDir = contactPoint.normal;
             } else if ( other.gameObject.CompareTag(gameObject.tag) || other.gameObject.CompareTag(TAG_TOP_WALL) ) {
                 ResetPhysics();
                 SetForce(Vector2.zero, 0);

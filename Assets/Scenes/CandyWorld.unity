@@ -1149,7 +1149,7 @@ GameObject:
   - component: {fileID: 1450836395}
   m_Layer: 9
   m_Name: Collider_Right
-  m_TagString: RightWall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1285,7 +1285,7 @@ GameObject:
   - component: {fileID: 1517992565}
   m_Layer: 9
   m_Name: Collider_Left
-  m_TagString: LeftWall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

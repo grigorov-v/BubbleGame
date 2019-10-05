@@ -32,9 +32,10 @@ namespace GameProcess {
             if ( String.IsNullOrEmpty(newTag) ) {
                 return;
             }
-            _lastBubble.SetBubbleTag(newTag);
-            _lastBubble.UpdateBubbleReward();
 
+            _lastBubble.UpdateBubbleReward(newTag)
+                .PhysicsSimulated(false);
+                
             _lastGenerateCount = levelInfo.LastGenerateCount;
         }
 
@@ -68,15 +69,10 @@ namespace GameProcess {
                 return;
             }
             
-            _lastBubble.Rigidbody.simulated = true;
-            _lastBubble.Rigidbody.gravityScale = 0;
-            _lastBubble.Rigidbody.angularDrag = 0;
-
-            _lastBubble.Force = _force;
-            _lastBubble.BubbleFromGun = true;
-            _lastBubble.transform.SetParent(null);
-
-            _lastBubble.Rigidbody.AddForce(_bubblesCenter.up * _force, ForceMode2D.Impulse);
+            _lastBubble.SetParent(null)
+                .PhysicsSimulated(true)
+                .SetGunFlag(true)
+                .SetForce(_bubblesCenter.up, _force);
         }
 
         void ReloadGun() {
@@ -89,14 +85,13 @@ namespace GameProcess {
             }
 
             _lastBubble = _lastBubble.CopyBubble();
-            _lastBubble.Init();
-            _lastBubble.transform.SetParent(_bubblesCenter);
-            _lastBubble.transform.localPosition = Vector2.zero;
-            _lastBubble.Rigidbody.simulated = false;
-            _lastBubble.Force = 0;
-
-            _lastBubble.SetBubbleTag(newTag);
-            _lastBubble.UpdateBubbleReward();
+           
+            _lastBubble.Init()
+                .SetParent(_bubblesCenter)
+                .SetLocalPosition(Vector2.zero)
+                .PhysicsSimulated(false)
+                .SetForce(Vector2.zero, 0)
+                .UpdateBubbleReward(newTag);
         }
 
         string GetNewBubbleTag() {

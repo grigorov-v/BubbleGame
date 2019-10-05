@@ -32,8 +32,7 @@ namespace GameProcess {
                 position.y -= scale.y * line;
 
                 var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
-                bubble.SetBubbleTag(bubbleInfo.Tag);
-                bubble.UpdateBubbleReward();
+                bubble.UpdateBubbleReward(bubbleInfo.Tag);
 
                 if ( column >= (_columnCount - 1) ) {
                     column = 0;

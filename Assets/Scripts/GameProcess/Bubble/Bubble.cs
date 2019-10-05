@@ -11,6 +11,10 @@ namespace GameProcess {
     public class Bubble : MonoBehaviour {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
 
+        const string TAG_LEFT_WALL             = "LeftWall"; 
+        const string TAG_RIGHT_WALL            = "RightWall";
+        const string TAG_TOP_WALL              = "TopWall"; 
+
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
         [SerializeField] string             _bubbleTag     = string.Empty;
@@ -22,13 +26,15 @@ namespace GameProcess {
         List<Bubble> _connectedBubbles = new List<Bubble>();
         Animator     _animator         = null;
         bool         _init             = false;
+        Rigidbody2D  _rigidbody        = null;
+        float        _curForce         = 0;
       
         public BubbleReward ActiveBubbleReward {get; private set;}
-        public Rigidbody2D  Rigidbody          {get; private set;}
+        
         public bool         IsDeactivate       {get; private set;}
 
         public bool         BubbleFromGun      {get; set;}
-        public float        Force              {get; set;}
+        
 
         public string BubbleTag {
             get {
@@ -120,39 +126,93 @@ namespace GameProcess {
         private void OnCollisionEnter2D(Collision2D other) {
             var newDir = Vector2.zero;
 
-            if ( other.gameObject.CompareTag("LeftWall") ) {
+            if ( other.gameObject.CompareTag(TAG_LEFT_WALL) ) {
                 newDir = other.transform.right;
-            } else if ( other.gameObject.CompareTag("RightWall") ) {
+            } else if ( other.gameObject.CompareTag(TAG_RIGHT_WALL) ) {
                 newDir = -other.transform.right;
-            } else if ( other.gameObject.CompareTag("Bubble") || other.gameObject.CompareTag("TopWall") ) {
-                Rigidbody.velocity = Vector2.zero;
-                Rigidbody.gravityScale = -1;
-                Rigidbody.angularDrag = 0.05f;
-                Force = 0;
+            } else if ( other.gameObject.CompareTag(gameObject.tag) || other.gameObject.CompareTag(TAG_TOP_WALL) ) {
+                ResetPhysics();
+                SetForce(Vector2.zero, 0);
             }
             
-            Rigidbody.AddForce(newDir * Force, ForceMode2D.Impulse);
+            SetForce(newDir, _curForce);
             EventManager.Fire(new PostBubbleCollision(this, other));
         }
 
-        public void Init() {
+        public Bubble Init() {
             if ( _init ) {
-                return;
+                return this;
             }
 
             AddToCache(gameObject, this);
             _animator = GetComponent<Animator>();
 
             UpdateBubbleReward();
-            Rigidbody = GetComponent<Rigidbody2D>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+            ResetPhysics();
             _init = true;
+            return this;
         }
         
-        public void SetBubbleTag(string tag) {
+        public Bubble UpdateBubbleReward(string tag) {
             _bubbleTag = tag;
+            UpdateBubbleReward();
+            return this;
         }
 
-        public void UpdateBubbleReward() {
+        public Bubble CopyBubble() {
+            var copyBubble = Instantiate(this, transform.parent);
+            copyBubble.name = "Bubble" + "[copy]";
+            return copyBubble;
+        }
+
+        public Bubble SetParent(Transform parent) {
+            transform.SetParent(parent);
+            return this;
+        }
+
+        public Bubble SetLocalPosition(Vector2 localPosition) {
+            transform.localPosition = localPosition;
+            return this;
+        }
+
+        public Bubble PhysicsSimulated(bool isSimulated) {
+            _rigidbody.isKinematic = !isSimulated;
+            return this;
+        }
+
+        public Bubble ResetPhysics() {
+            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.gravityScale = -1;
+            _rigidbody.angularDrag = 0.05f;
+            _rigidbody.Sleep();
+            return this;
+        }
+
+        public Bubble SetGunFlag(bool isActive) {
+            BubbleFromGun = isActive;
+            return this;
+        }
+
+        public Bubble SetForce(Vector2 direction, float force) {
+            _rigidbody.simulated = true;
+            _curForce = force;
+            _rigidbody.AddForce(direction * _curForce, ForceMode2D.Impulse);
+            return this;
+        }
+
+        //Вызывается в Animation Events
+        public void DeactivateBetweenAnimation() {
+            if ( !IsDeactivate ) {
+                return;
+            }
+
+            PlayRewardEffect();
+
+            Destroy(gameObject);
+        }
+
+        void UpdateBubbleReward() {
             foreach (var bubbleReward in _bubbleRewards) {
                 var isActive = (bubbleReward.BubbleTag == _bubbleTag);
                 bubbleReward.gameObject.SetActive(isActive);
@@ -163,11 +223,11 @@ namespace GameProcess {
             }
         }
 
-        public bool CheckConnectedBubble(Bubble bubble) {
+        bool CheckConnectedBubble(Bubble bubble) {
             return _connectedBubbles.IndexOf(bubble) != -1;
         }
 
-        public bool CheckAllConnectedBubble(Bubble bubble) {
+        bool CheckAllConnectedBubble(Bubble bubble) {
             if ( CheckConnectedBubble(bubble) ) {
                 return true;
             }
@@ -209,7 +269,7 @@ namespace GameProcess {
             _connectedBubbles.Remove(bubble);
         }
 
-        public void TryDeactivateAllConnectedBubbles() {
+        void TryDeactivateAllConnectedBubbles() {
             var count = GetCountConnectedBubbles();
             if ( count < 3 ) {
                 return;
@@ -274,24 +334,6 @@ namespace GameProcess {
             return count;
         }
 
-        //Вызывается в Animation Events
-        public void DeactivateBetweenAnimation() {
-            if ( !IsDeactivate ) {
-                return;
-            }
-
-            PlayRewardEffect();
-
-            Destroy(gameObject);
-        }
-
-        public Bubble CopyBubble() {
-            var copyBubble = Instantiate(this, transform.parent);
-            copyBubble.name = "Bubble" + "[copy]";
-            
-            return copyBubble;
-        }
-
         static void RecursiveDeactivateConnectedBubbles(List<Bubble> bubbles) {
             foreach ( var bub in bubbles ) {
                 if ( !bub ) {
@@ -311,7 +353,7 @@ namespace GameProcess {
             }
         }
 
-        private void OnDrawGizmosSelected() {
+        void OnDrawGizmosSelected() {
             if ( _bubbleTag != "Bomb" ) {
                 return;
             }

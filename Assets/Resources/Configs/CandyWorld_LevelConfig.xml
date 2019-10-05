@@ -4,11 +4,30 @@
     <level>
         <bubbles>
             <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
         </bubbles>
 
-        <bubbles_for_gun last_generate_count="3">
+        <bubbles_for_gun last_generate_count="10">
             <bubble tag="Lemon"/>
             <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+
+            <bubble tag="Heart"/>
+            <bubble tag="Heart"/>
         </bubbles_for_gun>
     </level>
 </root>

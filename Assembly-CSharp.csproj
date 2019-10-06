@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\Core\XML\IConfig.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeExtensions.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
+     <Compile Include="Assets\Scripts\DebugDrawAllColliders.cs" />
      <Compile Include="Assets\Scripts\ForTests\ButtonReload.cs" />
      <Compile Include="Assets\Scripts\ForTests\ReadXml.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\Bubble.cs" />

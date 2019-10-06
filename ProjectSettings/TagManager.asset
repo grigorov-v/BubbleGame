@@ -16,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - LeftOrRightWallIgnore
-  - LeftOrRightWall
+  - ColliderLimiter
+  - ColliderLimiter_Ignore
   - 
   - 
   - 

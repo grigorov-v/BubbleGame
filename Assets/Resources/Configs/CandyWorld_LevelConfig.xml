@@ -18,6 +18,14 @@
             <bubble tag="Heart"/>
             <bubble tag="Heart"/>
             <bubble tag="Heart"/>
+
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
         </bubbles>
 
         <bubbles_for_gun last_generate_count="10">

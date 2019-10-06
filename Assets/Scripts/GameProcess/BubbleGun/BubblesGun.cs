@@ -72,7 +72,8 @@ namespace GameProcess {
             _lastBubble.SetParent(null)
                 .PhysicsSimulated(true)
                 .SetGunFlag(true)
-                .SetForce(_bubblesCenter.up, _force);
+                .SetForce(_bubblesCenter.up, _force)
+                .SetIgnoreLimitCollider(true);
         }
 
         void ReloadGun() {

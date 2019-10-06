@@ -13,6 +13,7 @@ namespace GameProcess {
         
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
         const string TAG_TOP_WALL              = "TopWall";
+        const string LAYER_IGNORE_LIMIT        = "ColliderLimiter_Ignore";
         
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
@@ -108,7 +109,11 @@ namespace GameProcess {
             RemoveToCache(gameObject);
         }
 
-        private void OnTriggerStay2D(Collider2D other) {
+        private void OnTriggerEnter2D(Collider2D other) {
+            if (other.gameObject.CompareTag(gameObject.tag)) {
+                SetIgnoreLimitCollider(false);
+            }
+
             var bubble = FindToCache(other.gameObject);
             TryAddConnectedBubble(bubble);
 
@@ -123,12 +128,13 @@ namespace GameProcess {
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
-            var newDir = Vector2.zero;
-            var contactPoint = other.GetContact(0);
+            var newDir = Vector2.zero; 
 
             if ( other.gameObject.CompareTag(TAG_WALL) ) {
+                var contactPoint = other.GetContact(0);
                 newDir = contactPoint.normal;
             } else if ( other.gameObject.CompareTag(gameObject.tag) || other.gameObject.CompareTag(TAG_TOP_WALL) ) {
+                SetIgnoreLimitCollider(false);
                 ResetPhysics();
                 SetForce(Vector2.zero, 0);
             }
@@ -175,7 +181,12 @@ namespace GameProcess {
         }
 
         public Bubble PhysicsSimulated(bool isSimulated) {
-            _rigidbody.isKinematic = !isSimulated;
+            var isKinematic = !isSimulated;
+            if ( _rigidbody.isKinematic == isKinematic ) {
+                return this;
+            }
+
+            _rigidbody.isKinematic = isKinematic;
             return this;
         }
 
@@ -183,7 +194,6 @@ namespace GameProcess {
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.gravityScale = -1;
             _rigidbody.angularDrag = 0.05f;
-            _rigidbody.Sleep();
             return this;
         }
 
@@ -199,6 +209,16 @@ namespace GameProcess {
             return this;
         }
 
+        public Bubble SetIgnoreLimitCollider(bool isIgnore) {
+            // var newLayer = isIgnore ? LayerMask.NameToLayer(LAYER_IGNORE_LIMIT) : 0;
+            // if ( newLayer == gameObject.layer ) {
+            //     return this;
+            // }
+
+            // gameObject.layer = newLayer;
+            return this;
+        }
+
         //Вызывается в Animation Events
         public void DeactivateBetweenAnimation() {
             if ( !IsDeactivate ) {
@@ -206,7 +226,6 @@ namespace GameProcess {
             }
 
             PlayRewardEffect();
-
             Destroy(gameObject);
         }
 

@@ -119,14 +119,19 @@ namespace GameProcess {
             }
 
             _lastGenerateCount --;
-
+            var bubblesList = new List<string>();
             foreach (var itemCache in Bubble.CacheBubbles) {
                 if ( itemCache.Value != _lastBubble ) {
-                    return itemCache.Value.BubbleTag;
+                    bubblesList.Add(itemCache.Value.BubbleTag);
                 }
             }
 
-            return null;
+            if ( bubblesList.Count == 0 ) {
+                return null;
+            }
+
+            var rand = UnityEngine.Random.Range(0, bubblesList.Count);
+            return bubblesList[rand];
         }
 
         void OnPostBubbleCollision(PostBubbleCollision e) {

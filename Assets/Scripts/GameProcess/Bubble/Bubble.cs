@@ -28,13 +28,10 @@ namespace GameProcess {
         bool         _init             = false;
         Rigidbody2D  _rigidbody        = null;
         float        _curForce         = 0;
+        bool         _bubbleFromGun    = false;
       
         public BubbleReward ActiveBubbleReward {get; private set;}
-        
         public bool         IsDeactivate       {get; private set;}
-
-        public bool         BubbleFromGun      {get; set;}
-        
 
         public string BubbleTag {
             get {
@@ -117,8 +114,8 @@ namespace GameProcess {
             var bubble = FindToCache(other.gameObject);
             TryAddConnectedBubble(bubble);
 
-            if ( BubbleFromGun ) {
-                TryDeactivateAllConnectedBubbles();
+            if ( _bubbleFromGun ) {
+                TryDeactivateAllConnectedBubbles();  
             }
         }
 
@@ -141,6 +138,15 @@ namespace GameProcess {
             
             SetForce(newDir, _curForce);
             EventManager.Fire(new PostBubbleCollision(this, other));
+        }
+
+        private void OnCollisionStay2D(Collision2D other) {
+            if ( !other.gameObject.CompareTag(TAG_TOP_WALL) ) {
+                return;
+            }
+
+            _rigidbody.velocity = Vector2.zero;
+            _curForce = 0;
         }
 
         public Bubble Init() {
@@ -198,7 +204,7 @@ namespace GameProcess {
         }
 
         public Bubble SetGunFlag(bool isActive) {
-            BubbleFromGun = isActive;
+            _bubbleFromGun = isActive;
             return this;
         }
 

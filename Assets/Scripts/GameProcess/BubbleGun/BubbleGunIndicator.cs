@@ -52,7 +52,7 @@ namespace GameProcess {
 
         void DrawDefaultAndReflectLine(RaycastHit2D raycastHit) {
             var direction = GetDirection(raycastHit.point, _startTransform.position);
-            var offset = -direction * 0.25f;
+            var offset = -direction * 0.2f;
             var raycastPoint = raycastHit.point + offset;
             
             var countDefaultPoints = CountPointsBetweenPositions(_startTransform.position, raycastPoint);
@@ -93,11 +93,13 @@ namespace GameProcess {
         private void Update() {
             var raycastHit = Physics2D.Raycast(transform.position, transform.up);
             var isDrawReflectLine = IsDrawReflectLine(raycastHit);
-            if ( !isDrawReflectLine ) {
-                DrawDefaultLine();
-            } else {
-                DrawDefaultAndReflectLine(raycastHit);
-            }
+            // if ( !isDrawReflectLine ) {
+            //     DrawDefaultLine();
+            // } else {
+            //     DrawDefaultAndReflectLine(raycastHit);
+            // }
+
+            DrawDefaultLine();
         }
 
         // private Vector2 CalculatePosition(float elapsedTime, Vector2 startPosition, Rigidbody2D rb) {

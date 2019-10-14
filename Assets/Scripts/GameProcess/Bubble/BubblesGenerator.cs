@@ -11,8 +11,9 @@ namespace GameProcess {
     public class BubblesGenerator : MonoBehaviour {
         [SerializeField] Bubble    _bubblePrototype = null;
         [SerializeField] Transform _startPoint      = null;
-        [SerializeField] int       _columnCount     = 8;
-
+        [SerializeField] int       _columnCount     = 9;
+        [SerializeField] float     _startOffset     = 0.4f;
+ 
         private void Start() {
             Generate();
         }
@@ -30,6 +31,9 @@ namespace GameProcess {
 
                 position.x += scale.x * column;
                 position.y -= scale.y * line;
+
+                position.x += _startOffset;
+                position.y -= _startOffset;
 
                 var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
                 bubble.UpdateBubbleReward(bubbleInfo.Tag);

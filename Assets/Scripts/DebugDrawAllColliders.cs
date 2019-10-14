@@ -20,13 +20,15 @@ public class DebugDrawAllColliders : MonoBehaviour {
         foreach ( var collider in _boxColliders ) {
             var center = (Vector2)collider.transform.position + collider.offset;
             var size = collider.size;
+            var diff = Vector2.one - (Vector2)collider.transform.localScale;
+            size -= diff;
             Gizmos.DrawWireCube(center, size);
         }
 
-        foreach ( var collider in _circleColliders ) {
-            var center = (Vector2)collider.transform.position + collider.offset;
-            var radius = collider.radius;
-            Gizmos.DrawWireSphere(center, radius);
-        }
+        // foreach ( var collider in _circleColliders ) {
+        //     var center = (Vector2)collider.transform.position + collider.offset;
+        //     var radius = collider.radius;
+        //     Gizmos.DrawWireSphere(center, radius);
+        // }
     }
 }

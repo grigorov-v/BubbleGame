@@ -13,7 +13,6 @@ namespace GameProcess {
         
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
         const string TAG_TOP_WALL              = "TopWall";
-        const string LAYER_IGNORE_LIMIT        = "ColliderLimiter_Ignore";
         
         public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
 
@@ -125,18 +124,16 @@ namespace GameProcess {
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
-            var newDir = Vector2.zero; 
-
             if ( other.gameObject.CompareTag(TAG_WALL) ) {
                 var contactPoint = other.GetContact(0);
-                newDir = contactPoint.normal;
+                var newDir = contactPoint.normal;
+                SetForce(newDir, _curForce);
             } else if ( other.gameObject.CompareTag(gameObject.tag) || other.gameObject.CompareTag(TAG_TOP_WALL) ) {
                 SetIgnoreLimitCollider(false);
                 ResetPhysics();
                 SetForce(Vector2.zero, 0);
             }
-            
-            SetForce(newDir, _curForce);
+           
             EventManager.Fire(new PostBubbleCollision(this, other));
         }
 

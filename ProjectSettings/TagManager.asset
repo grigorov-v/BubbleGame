@@ -16,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - ColliderLimiter
-  - ColliderLimiter_Ignore
+  - GunCollider
+  - GunCollider_Ignore
   - 
   - 
   - 

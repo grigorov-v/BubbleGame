@@ -29,13 +29,17 @@
         </bubbles>
 
         <bubbles_for_gun last_generate_count="10">
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
+            <bubble tag="BluePop"/>
+            <bubble tag="BluePop"/>
 
             <bubble tag="Heart"/>
             <bubble tag="Heart"/>
+
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+            <bubble tag="Lemon"/>
+           
         </bubbles_for_gun>
     </level>
 </root>

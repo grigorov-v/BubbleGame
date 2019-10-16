@@ -68,6 +68,8 @@ namespace GameProcess {
             if ( !_lastBubble ) {
                 return;
             }
+
+            ResetAllGunFlags();
             
             _lastBubble.SetParent(null)
                 .PhysicsSimulated(true)
@@ -140,6 +142,17 @@ namespace GameProcess {
             }
 
             ReloadGun();
+        }
+
+        void ResetAllGunFlags() {
+            foreach (var item in Bubble.CacheBubbles) {
+                var bubble = item.Value;
+                if ( bubble == _lastBubble ) {
+                    continue;
+                }
+
+                bubble.SetGunFlag(false);
+            }
         }
     }
 }

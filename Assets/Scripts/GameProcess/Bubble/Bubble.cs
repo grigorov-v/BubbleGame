@@ -18,6 +18,7 @@ namespace GameProcess {
 
         [SerializeField] string             _bubbleTag     = string.Empty;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
+        [SerializeField] ParticleSystem     _deactivateParticle = null;
 
         [SerializeField] [HideIf("IsHideBombRadius")]
         float _bombRadius = 1;
@@ -157,6 +158,8 @@ namespace GameProcess {
             UpdateBubbleReward();
             _rigidbody = GetComponent<Rigidbody2D>();
             ResetPhysics();
+            _deactivateParticle.gameObject.SetActive(false);
+
             _init = true;
             return this;
         }
@@ -230,6 +233,11 @@ namespace GameProcess {
 
             PlayRewardEffect();
             Destroy(gameObject);
+
+            _deactivateParticle.gameObject.SetActive(true);
+            _deactivateParticle.transform.SetParent(null);
+            _deactivateParticle.Play();
+            Destroy(_deactivateParticle.gameObject, 2);
         }
 
         void UpdateBubbleReward() {

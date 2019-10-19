@@ -90,7 +90,10 @@
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
      <Compile Include="Assets\Scripts\GameProcess\ScoreTable.cs" />
+     <None Include="Assets\Jiggly Bubble Free\readme_Jiggly_Bubble_Free.txt" />
+     <None Include="Assets\Jiggly Bubble Free\Shaders\Particle Alpha Blended Cubemap.shader" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Jiggly Bubble Free\Shaders\Particle Alpha Blended Cubemap Skybox.shader" />
      <None Include="Assets\Resources\Configs\CandyWorld_LevelConfig.xml" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Projects/BubbleGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

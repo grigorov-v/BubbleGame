@@ -21,6 +21,7 @@ namespace Controllers {
 
             if ( path.IndexOf("{SceneName}") != -1 ) {
                 var sceneName = SceneManager.GetActiveScene().name;
+                sceneName = sceneName.Replace("_map", "");
                 path = path.Replace("{SceneName}", sceneName);
             }
 

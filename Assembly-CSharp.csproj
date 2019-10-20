@@ -89,7 +89,8 @@
      <Compile Include="Assets\Scripts\GameProcess\Bubble\BubblesGenerator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
-     <Compile Include="Assets\Scripts\GameProcess\ScoreTable.cs" />
+     <Compile Include="Assets\Scripts\GameProcess\Decor\CloudsAnimation.cs" />
+     <Compile Include="Assets\Scripts\GameProcess\Decor\ScoreTable.cs" />
      <None Include="Assets\Jiggly Bubble Free\readme_Jiggly_Bubble_Free.txt" />
      <None Include="Assets\Jiggly Bubble Free\Shaders\Particle Alpha Blended Cubemap.shader" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />

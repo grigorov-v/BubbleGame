@@ -83,12 +83,14 @@
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
      <Compile Include="Assets\Scripts\DebugDrawAllColliders.cs" />
      <Compile Include="Assets\Scripts\ForTests\ButtonReload.cs" />
+     <Compile Include="Assets\Scripts\ForTests\ButtonStartLevel.cs" />
      <Compile Include="Assets\Scripts\ForTests\ReadXml.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\Bubble.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\BubbleReward.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Bubble\BubblesGenerator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
      <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
+     <Compile Include="Assets\Scripts\GameProcess\CameraScroll.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Decor\CloudsAnimation.cs" />
      <Compile Include="Assets\Scripts\GameProcess\Decor\ScoreTable.cs" />
      <None Include="Assets\Jiggly Bubble Free\readme_Jiggly_Bubble_Free.txt" />

@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\Core\Singleton\SingleInstance.cs" />
      <Compile Include="Assets\Scripts\Core\Time\TimeUtils.cs" />
      <Compile Include="Assets\Scripts\Core\XML\IConfig.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\ISave.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeExtensions.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
      <Compile Include="Assets\Scripts\DebugDrawAllColliders.cs" />

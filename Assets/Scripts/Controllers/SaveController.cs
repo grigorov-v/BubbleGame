@@ -18,6 +18,14 @@ namespace Controllers {
     }
 
     public class SaveController : BaseController<SaveController> {
+        List<XmlSaveInfo> _xmlLoadableInfoList = new List<XmlSaveInfo>() {
+            new XmlSaveInfo() {
+                Save     = null,
+                Key      = "{SceneName}",
+                NodeName = "root"
+            }   
+        };
+
         public override void PostInit() {
         }
     }

@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Configs\LevelConfig.cs" />
      <Compile Include="Assets\Scripts\Controllers\ConfigsController.cs" />
      <Compile Include="Assets\Scripts\Controllers\ControllersInitializer.cs" />
+     <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\BaseController.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\IController.cs" />
      <Compile Include="Assets\Scripts\Core\Events\EventData.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\Core\Time\TimeUtils.cs" />
      <Compile Include="Assets\Scripts\Core\XML\IConfig.cs" />
      <Compile Include="Assets\Scripts\Core\XML\ISave.cs" />
+     <Compile Include="Assets\Scripts\Core\XML\LoadHelper.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeExtensions.cs" />
      <Compile Include="Assets\Scripts\Core\XML\XmlNodeLoadable.cs" />
      <Compile Include="Assets\Scripts\DebugDrawAllColliders.cs" />

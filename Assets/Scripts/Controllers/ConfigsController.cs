@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 using UnityEngine;
@@ -11,35 +10,10 @@ using Core.XML;
 using Configs;
 
 namespace Controllers {
-    public struct XmlLoadableInfo {
+    struct XmlLoadableInfo {
         public IConfig Config;
         public string AssetPath;
         public string NodeName;
-
-        public string InitAssetPath() {
-            var path = AssetPath;
-
-            if ( path.IndexOf("{SceneName}") != -1 ) {
-                var sceneName = SceneManager.GetActiveScene().name;
-                sceneName = sceneName.Replace("_map", "");
-                path = path.Replace("{SceneName}", sceneName);
-            }
-
-            return path;
-        }
-
-        public void LoadXml() {
-            AssetPath = InitAssetPath();
-            var xmlAsset = Resources.Load(AssetPath) as TextAsset;
-
-            var xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(xmlAsset.text);
-
-            var root = xmlDoc.DocumentElement;
-            var node = (NodeName == "root") ? (root as XmlNode) : (root[NodeName] as XmlNode);
-
-            Config.Load(node);
-        }
     }
 
     public class ConfigsController : BaseController<ConfigsController> {
@@ -52,7 +26,22 @@ namespace Controllers {
         };
 
         public override void PostInit() {
-            _xmlLoadableInfoList.ForEach(info => info.LoadXml());
+            foreach (var loadableInfo in _xmlLoadableInfoList) {
+                var config = loadableInfo.Config;
+                var assetPath = FilterAssetPath(loadableInfo.AssetPath);
+                var nodeName = loadableInfo.NodeName;
+                LoadHelper.LoadFromResources(config, assetPath, nodeName);
+            }
+        }
+
+        string FilterAssetPath(string path) {
+            if ( path.IndexOf("{SceneName}") != -1 ) {
+                var sceneName = SceneManager.GetActiveScene().name;
+                sceneName = sceneName.Replace("_map", "");
+                path = path.Replace("{SceneName}", sceneName);
+            }
+
+            return path;
         }
 
         public T FindConfig<T>() where T: class, IConfig {

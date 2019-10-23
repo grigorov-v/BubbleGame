@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace Core.XML {
-    public interface ISave: XmlNodeLoadable<ISave> {
+    public interface ISave: IConfig {
         void Save(XmlNode node);
     }
 }

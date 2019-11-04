@@ -65,8 +65,8 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\Configs\LevelConfig.cs" />
+     <Compile Include="Assets\Scripts\Controllers\Common\ControllersInitializer.cs" />
      <Compile Include="Assets\Scripts\Controllers\ConfigsController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\ControllersInitializer.cs" />
      <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\BaseController.cs" />
      <Compile Include="Assets\Scripts\Core\Controller\IController.cs" />

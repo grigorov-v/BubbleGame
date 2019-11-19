@@ -107,10 +107,6 @@ namespace GameProcess {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.gameObject.CompareTag(gameObject.tag)) {
-                SetIgnoreLimitCollider(false);
-            }
-
             var bubble = FindToCache(other.gameObject);
             TryAddConnectedBubble(bubble);
 
@@ -130,7 +126,6 @@ namespace GameProcess {
                 var newDir = contactPoint.normal;
                 SetForce(newDir, _curForce);
             } else if ( other.gameObject.CompareTag(gameObject.tag) || other.gameObject.CompareTag(TAG_TOP_WALL) ) {
-                SetIgnoreLimitCollider(false);
                 ResetPhysics();
                 SetForce(Vector2.zero, 0);
             }
@@ -212,16 +207,6 @@ namespace GameProcess {
             _rigidbody.simulated = true;
             _curForce = force;
             _rigidbody.AddForce(direction * _curForce, ForceMode2D.Impulse);
-            return this;
-        }
-
-        public Bubble SetIgnoreLimitCollider(bool isIgnore) {
-            // var newLayer = isIgnore ? LayerMask.NameToLayer(LAYER_IGNORE_LIMIT) : 0;
-            // if ( newLayer == gameObject.layer ) {
-            //     return this;
-            // }
-
-            // gameObject.layer = newLayer;
             return this;
         }
 

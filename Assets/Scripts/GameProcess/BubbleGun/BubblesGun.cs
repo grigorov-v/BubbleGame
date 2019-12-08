@@ -6,6 +6,7 @@ using UnityEngine;
 
 using Core.Events;
 
+using GameProcess.Events;
 using Controllers;
 using Configs;
 

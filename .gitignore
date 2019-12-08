@@ -1,3 +1,8 @@
 Library/
 Temp/
 obj/Debug/
+NaughtyAttributes.Test.csproj
+NaughtyAttributes.Editor.csproj
+NaughtyAttributes.Core.csproj
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj

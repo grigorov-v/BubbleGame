@@ -1,31 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Core.Events;
+using GameProcess.Events;
+using DG.Tweening;
 
 namespace GameProcess {
     public class CameraScroll : MonoBehaviour {
-        [SerializeField] float _speedScroll = 10f;
-        [SerializeField] float _minY        = 0;
-        [SerializeField] float _maxY        = 0;
+        [SerializeField] float _speedScroll     = 0.004f;
 
-        float _startYPosCamera = 0;
-        float _startYPosMouse  = 0;
+        [Header("Clamp camera position")]
+        [SerializeField] float _minY            = 0;
+        [SerializeField] float _maxY            = 0;
 
-        void LateUpdate() {
-            if ( Input.GetMouseButtonDown(0) ) {
-                _startYPosCamera = transform.position.y;
-                _startYPosMouse = Input.mousePosition.y;
+        [Header("Elastic settings")]
+        [SerializeField] float _elastic         = 0;
+        [SerializeField] float _elasticDuration = 0.5f;
+
+        Tween _tweenElastic = null;
+
+        void Awake() {
+            EventManager.Subscribe<MapDrag>(this, OnMapDrag);
+            EventManager.Subscribe<EndMapDrag>(this, OnEndMapDrag);
+        }
+
+        void OnDestroy() {
+            EventManager.Unsubscribe<MapDrag>(OnMapDrag);
+            EventManager.Unsubscribe<EndMapDrag>(OnEndMapDrag);
+        }
+
+        void KillTweenElastic() {
+            if ( _tweenElastic == null ) {
+                return;
+            }
+            
+            _tweenElastic.Kill();
+        }
+
+        void UpdateElastic() {
+            KillTweenElastic();
+
+            var endValue = transform.position.y;
+            if ( endValue > _maxY ) {
+                endValue = _maxY;
+            } else if ( endValue < _minY ) {
+                endValue = _minY;
             }
 
-            if ( Input.GetMouseButton(0) ) {
-                var curYMouse = Input.mousePosition.y;
-                var yOffset = _startYPosMouse - curYMouse;
+            _tweenElastic = transform.DOMoveY(endValue, _elasticDuration);
+        }
 
-                var newPosCamera = transform.position;
-                newPosCamera.y = _startYPosCamera + yOffset * _speedScroll;
-                newPosCamera.y = Mathf.Clamp(newPosCamera.y, _minY, _maxY);
-                transform.position = newPosCamera;
-            }
+        void OnMapDrag(MapDrag e) {            
+            var newPosCamera = transform.position;
+            newPosCamera.y -= e.EventData.delta.y * _speedScroll;
+            
+            var maxY = _maxY + _elastic;
+            var minY = _minY - _elastic;
+            newPosCamera.y = Mathf.Clamp(newPosCamera.y, minY, maxY);
+            transform.position = newPosCamera;
+        }
+
+        void OnEndMapDrag(EndMapDrag e) {
+            UpdateElastic();
         }
     }
 }

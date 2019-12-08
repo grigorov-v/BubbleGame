@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Core.Events;
-using Configs;
+
+using GameProcess.Events;
 using Controllers;
 using NaughtyAttributes;
 

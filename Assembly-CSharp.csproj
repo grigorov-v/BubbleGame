@@ -101,7 +101,7 @@
     <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubbleGunIndicator.cs" />
     <Compile Include="Assets\Scripts\GameProcess\BubbleGun\BubblesGun.cs" />
     <Compile Include="Assets\Scripts\GameProcess\CameraScroll.cs" />
-    <Compile Include="Assets\Scripts\GameProcess\Decor\CloudsAnimation.cs" />
+    <Compile Include="Assets\Scripts\GameProcess\Decor\Clouds.cs" />
     <Compile Include="Assets\Scripts\GameProcess\Decor\ScoreTable.cs" />
     <Compile Include="Assets\Scripts\GameProcess\Events.cs" />
     <Compile Include="Assets\Scripts\GameProcess\Map\MapDragHandler.cs" />

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+
 using Core.Events;
 using GameProcess.Events;
+
 using DG.Tweening;
+using NaughtyAttributes;
 
 namespace GameProcess {
     public class CameraScroll : MonoBehaviour {
@@ -60,6 +63,16 @@ namespace GameProcess {
 
         void OnEndMapDrag(EndMapDrag e) {
             UpdateElastic();
+        }
+
+        [Button]
+        void RememmberMinY() {
+            _minY = transform.position.y;
+        }
+
+        [Button]
+        void RememmberMaxY() {
+            _maxY = transform.position.y;
         }
     }
 }

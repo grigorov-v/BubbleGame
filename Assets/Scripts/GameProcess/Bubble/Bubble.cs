@@ -166,12 +166,6 @@ namespace GameProcess {
             return this;
         }
 
-        public Bubble CopyBubble() {
-            var copyBubble = Instantiate(this, transform.parent);
-            copyBubble.name = "Bubble" + "[copy]";
-            return copyBubble;
-        }
-
         public Bubble SetParent(Transform parent) {
             transform.SetParent(parent);
             return this;
@@ -328,7 +322,7 @@ namespace GameProcess {
 
             var endPosAnim = ScoreTable.Instance.PointForRewardAnimation.position;
             ActiveBubbleReward.transform.SetParent(null);
-            ActiveBubbleReward.PlayRefwardAnimation(endPosAnim);
+            ActiveBubbleReward.PlayRewardAnimation(endPosAnim);
         }
 
         int GetCountConnectedBubbles() {

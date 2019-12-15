@@ -6,10 +6,12 @@ using Core.XML;
 
 namespace Configs {
     public class BubbleInfo: XmlNodeLoadable<BubbleInfo> {
-        public string Tag    {get; private set;}
+        public string Tag   {get; private set;}
+        public int    Count {get; private set;}
 
         public BubbleInfo Load(XmlNode node) {
-            Tag    = node.GetAttrValue("tag", string.Empty);
+            Tag   = node.GetAttrValue("tag", string.Empty);
+            Count = node.GetAttrValue("count", 1);
             return this;
         }
     }

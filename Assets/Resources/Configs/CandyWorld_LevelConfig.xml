@@ -3,43 +3,15 @@
     <!-- Level 1 -->
     <level>
         <bubbles>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
+            <bubble tag="Lemon" count="7"/>
+            <bubble tag="Heart" count="7"/>
+            <bubble tag="BluePop" count="7"/>
         </bubbles>
 
         <bubbles_for_gun last_generate_count="10">
-            <bubble tag="BluePop"/>
-            <bubble tag="BluePop"/>
-
-            <bubble tag="Heart"/>
-            <bubble tag="Heart"/>
-
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-            <bubble tag="Lemon"/>
-           
+            <bubble tag="BluePop" count="2"/>
+            <bubble tag="Heart" count="2"/>
+            <bubble tag="Lemon" count="2"/>       
         </bubbles_for_gun>
     </level>
 </root>

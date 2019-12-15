@@ -87,8 +87,7 @@ namespace GameProcess {
                 return;
             }
 
-            _lastBubble = _lastBubble.CopyBubble();
-           
+            _lastBubble = BubblesGenerator.CreateNewBubble(_lastBubble);
             _lastBubble.Init()
                 .SetParent(_bubblesCenter)
                 .SetLocalPosition(Vector2.zero)

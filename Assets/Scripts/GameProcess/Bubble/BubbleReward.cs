@@ -5,31 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace GameProcess {
-    public enum BubbleTags {
-        None,
-        Lemon,
-        PurpleLollipop,
-        Bomb,
-        Heart,
-        PinkLollipop,
-        BlueLollipop,
-        WhiteLollipop,
-        GreenLollipop,
-        Star,
-        RedСandy,
-        ОrangeСandy,
-        СherryСandy,
-        BluePop,
-        Lightning,
-        StripedLollipop,
-        Cake,
-        Clock,
-        CaramelLollipop
-    }
-
     public class BubbleReward : MonoBehaviour {
-        const float FREEZE_ALPHA = 0.7f;
-
         [SerializeField] string _bubbleTag = string.Empty;
 
         SpriteRenderer _renderer = null;
@@ -52,15 +28,7 @@ namespace GameProcess {
             }
         }
 
-        public void SetFreezeColor() {
-            _renderer.color = new Color(1, 1, 1, FREEZE_ALPHA);
-        }
-
-        public void SetDefaultColor() {
-            _renderer.color = new Color(1, 1, 1, 1);
-        }
-
-        public void PlayRefwardAnimation(Vector2 endPos, float duration = 0.5f) {
+        public void PlayRewardAnimation(Vector2 endPos, float duration = 0.5f) {
             if ( _tween != null ) {
                 return;
             }

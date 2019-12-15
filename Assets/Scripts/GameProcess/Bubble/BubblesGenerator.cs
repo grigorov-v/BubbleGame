@@ -26,28 +26,36 @@ namespace GameProcess {
             var column = 0;
             var line = 0;
             foreach (var bubbleInfo in bubbles) {
-                var position = _startPoint.position;
-                var scale = _bubblePrototype.transform.localScale;
+                for ( int i = 0; i < bubbleInfo.Count; i++ ) {
+                    var position = _startPoint.position;
+                    var scale = _bubblePrototype.transform.localScale;
 
-                position.x += scale.x * column;
-                position.y -= scale.y * line;
+                    position.x += scale.x * column;
+                    position.y -= scale.y * line;
 
-                position.x += _startOffset;
-                position.y -= _startOffset;
+                    position.x += _startOffset;
+                    position.y -= _startOffset;
 
-                var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
-                bubble.UpdateBubbleReward(bubbleInfo.Tag);
+                    var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
+                    bubble.UpdateBubbleReward(bubbleInfo.Tag);
 
-                if ( column >= (_columnCount - 1) ) {
-                    column = 0;
-                    line ++;
-                    continue;
+                    if ( column >= (_columnCount - 1) ) {
+                        column = 0;
+                        line ++;
+                        continue;
+                    }
+
+                    column ++;
                 }
-
-                column ++;
             }
 
             Destroy(_bubblePrototype.gameObject);
+        }
+
+        public static Bubble CreateNewBubble(Bubble prototype) {
+            var newBubble = Instantiate(prototype, prototype.transform.parent);
+            newBubble.name = string.Format("Bubble[{0}]", newBubble.BubbleTag);
+            return newBubble;
         }
     }
 }

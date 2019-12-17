@@ -17,41 +17,37 @@ namespace Controllers {
     }
 
     public class ConfigsController : BaseController<ConfigsController> {
-        List<XmlLoadableInfo> _xmlLoadableInfoList = new List<XmlLoadableInfo>() {
-            new XmlLoadableInfo() {
-                Config    = new LevelConfig(),
-                AssetPath = "Configs/{SceneName}_LevelConfig",
-                NodeName  = "root"
-            }   
-        };
+        const string PATH_COMMON_CONFIG = "Configs/CommonConfig";
+
+        CommonConfig _commonConfig = new CommonConfig();
 
         public override void PostInit() {
-            foreach (var loadableInfo in _xmlLoadableInfoList) {
-                var config = loadableInfo.Config;
-                var assetPath = FilterAssetPath(loadableInfo.AssetPath);
-                var nodeName = loadableInfo.NodeName;
-                LoadHelper.LoadFromResources(config, assetPath, nodeName);
-            }
-        }
+            LoadHelper.LoadFromResources(_commonConfig, PATH_COMMON_CONFIG, "root");
 
-        string FilterAssetPath(string path) {
-            if ( path.IndexOf("{SceneName}") != -1 ) {
-                var sceneName = SceneManager.GetActiveScene().name;
-                sceneName = sceneName.Replace("_map", "");
-                path = path.Replace("{SceneName}", sceneName);
-            }
+            var worldInfo = _commonConfig.Worlds["CandyWorld"]; // Будет браться из сохранений
+            foreach (var pair in ConfigsRegistrator.Configs) {
+                var name = pair.Key;
+                var path = worldInfo.Configs.ContainsKey(name) ? worldInfo.Configs[name] : string.Empty;
 
-            return path;
+                if ( string.IsNullOrEmpty(path) ) {
+                    continue;
+                }
+
+                var config = pair.Value;
+                LoadHelper.LoadFromResources(config, path, "root");
+            }
         }
 
         public T FindConfig<T>() where T: class, IConfig {
-            foreach (var xmlLoadableInfo in _xmlLoadableInfoList) {
-                var check = (xmlLoadableInfo.Config is T);
+            foreach (var pair in ConfigsRegistrator.Configs) {
+                var config = pair.Value;
+
+                var check = (config is T);
                 if ( !check ) {
                     continue;
                 }
 
-                return xmlLoadableInfo.Config as T;
+                return config as T;
             }
 
             return null;

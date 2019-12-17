@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <worlds>
+        <world name="CandyWorld">
+            <map_scene name="CandyWorld_map"/>
+            <game_scene name="CandyWorld"/>
+            <configs>
+                <config name="level_config" value="Configs/CandyWorld_LevelConfig"/>
+            </configs>
+        </world>
+    </worlds>
+</root>

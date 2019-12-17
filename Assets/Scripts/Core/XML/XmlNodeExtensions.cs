@@ -362,6 +362,22 @@ namespace Core.XML {
 			return result;
 		}
 
+		public static Dictionary<string, string> LoadNodeDict(this XmlNode node, string parentName, string name, string def) {
+			var result = new Dictionary<string, string>();
+			foreach ( XmlNode parentNode in node.ChildNodes ) {
+				if ( parentNode.Name == parentName ) {
+					foreach ( XmlNode childNode in parentNode.ChildNodes ) {
+						if ( childNode.Name == name ) {
+							var key = childNode.GetNotEmptyStringAttr("name");
+							var value = childNode.GetAttrValue("value", def);
+							result[key] = value;
+						}
+					}
+				}
+			}
+			return result;
+		}
+
 		public static Dictionary<string, T> LoadNodeDict<T>(this XmlNode node, string name, Func<string, T> factory) where T : XmlNodeLoadable<T> {
 			var result = new Dictionary<string, T>();
 			foreach ( XmlNode childNode in node.ChildNodes ) {

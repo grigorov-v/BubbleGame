@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Xml;
+using System;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,12 +10,6 @@ using Core.XML;
 using Configs;
 
 namespace Controllers {
-    struct XmlLoadableInfo {
-        public IConfig Config;
-        public string AssetPath;
-        public string NodeName;
-    }
-
     public class ConfigsController : BaseController<ConfigsController> {
         const string PATH_COMMON_CONFIG = "Configs/CommonConfig";
 
@@ -24,7 +18,8 @@ namespace Controllers {
         public override void PostInit() {
             LoadHelper.LoadFromResources(_commonConfig, PATH_COMMON_CONFIG, "root");
 
-            var worldInfo = _commonConfig.Worlds["CandyWorld"]; // Будет браться из сохранений
+            var sceneName = SceneManager.GetActiveScene().name;
+            var worldInfo = FindWorldInfo(wi => (wi.MapSceneName == sceneName) || (wi.GameSceneName == sceneName));
             foreach (var pair in ConfigsRegistrator.Configs) {
                 var name = pair.Key;
                 var path = worldInfo.Configs.ContainsKey(name) ? worldInfo.Configs[name] : string.Empty;
@@ -39,14 +34,8 @@ namespace Controllers {
         }
 
         public T FindConfig<T>() where T: class, IConfig {
-            foreach (var pair in ConfigsRegistrator.Configs) {
-                var config = pair.Value;
-
-                var check = (config is T);
-                if ( !check ) {
-                    continue;
-                }
-
+            var config = FindConfig(c => c is T);
+            if ( config != null ) {
                 return config as T;
             }
 
@@ -65,6 +54,28 @@ namespace Controllers {
             }
 
             return levels[levelIndex];
+        }
+
+        IConfig FindConfig(Func<IConfig, bool> factory) {
+            foreach (var pair in ConfigsRegistrator.Configs) {
+                var config = pair.Value;
+                if ( factory(config) ) {
+                    return config;
+                }
+            }
+
+            return null;
+        }
+
+        WorldInfo FindWorldInfo(Func<WorldInfo, bool> factory) {
+            foreach (var pair in _commonConfig.Worlds) {
+                var worldInfo = pair.Value;
+                if ( factory(worldInfo) ) {
+                    return worldInfo;
+                }
+            }
+
+            return null;
         }
     } 
 }

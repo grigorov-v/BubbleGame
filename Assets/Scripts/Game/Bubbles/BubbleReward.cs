@@ -4,7 +4,7 @@ using UnityEngine;
 
 using DG.Tweening;
 
-namespace GameProcess {
+namespace Game.Bubbles {
     public class BubbleReward : MonoBehaviour {
         [SerializeField] string _bubbleTag = string.Empty;
 

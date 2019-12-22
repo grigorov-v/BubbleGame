@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameProcess {
+namespace Game.Bubbles {
     public class BubbleGunIndicator : MonoBehaviour {
         [SerializeField] Transform       _point                 = null;
         [SerializeField] Transform       _startTransform        = null;

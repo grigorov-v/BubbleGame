@@ -2,10 +2,9 @@
 using UnityEngine.EventSystems;
 
 using Core.Events;
+using Game.Events;
 
-using GameProcess.Events;
-
-namespace GameProcess {
+namespace Game.Bubbles {
     public class MapDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
         public void OnBeginDrag(PointerEventData eventData) {
             EventManager.Fire(new BeginMapDrag(eventData));

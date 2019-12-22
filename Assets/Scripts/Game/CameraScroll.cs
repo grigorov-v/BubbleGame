@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 using Core.Events;
-using GameProcess.Events;
+using Game.Events;
 
 using DG.Tweening;
 using NaughtyAttributes;
 
-namespace GameProcess {
+namespace Game {
     public class CameraScroll : MonoBehaviour {
         [SerializeField] float _speedScroll     = 0.004f;
 

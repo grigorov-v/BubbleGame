@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Core.Singleton;
 
-namespace GameProcess {
+namespace Game {
     public class ScoreTable : MonoSingleton<ScoreTable> {
         [SerializeField] Transform _pointForRewardAnimation = null;
 

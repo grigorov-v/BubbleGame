@@ -7,7 +7,7 @@ using NaughtyAttributes;
 using Configs;
 using Controllers;
 
-namespace GameProcess {
+namespace Game.Bubbles {
     public class BubblesGenerator : MonoBehaviour {
         [SerializeField] Bubble    _bubblePrototype = null;
         [SerializeField] Transform _startPoint      = null;

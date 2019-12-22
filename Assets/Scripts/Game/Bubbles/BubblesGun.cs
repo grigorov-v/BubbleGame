@@ -6,10 +6,10 @@ using UnityEngine;
 
 using Core.Events;
 
-using GameProcess.Events;
+using Game.Events;
 using Controllers;
 
-namespace GameProcess {
+namespace Game.Bubbles {
     public class BubblesGun : MonoBehaviour {
         [SerializeField] float              _force         = 10;
         [SerializeField] Transform          _bubblesCenter = null;

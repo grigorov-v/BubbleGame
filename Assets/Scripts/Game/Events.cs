@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace GameProcess.Events {
+using Game.Bubbles;
+
+namespace Game.Events {
     public struct PostBubbleCollision {
         public Bubble      Bubble    {get; private set;}
         public Collision2D Collision {get; private set;}

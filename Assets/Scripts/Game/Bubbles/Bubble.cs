@@ -4,11 +4,11 @@ using UnityEngine;
 
 using Core.Events;
 
-using GameProcess.Events;
+using Game.Events;
 using Controllers;
 using NaughtyAttributes;
 
-namespace GameProcess {
+namespace Game.Bubbles {
     public class Bubble : MonoBehaviour {
         public const string TAG_WALL  = "Wall";
         

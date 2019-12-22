@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
 
-namespace GameProcess {
+namespace Game {
     public class Clouds : MonoBehaviour {
         [SerializeField] List<Transform> _clouds = new List<Transform>();
         [SerializeField] Vector2         _size   = Vector2.one;

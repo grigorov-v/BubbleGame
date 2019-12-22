@@ -15,7 +15,7 @@ namespace GameProcess {
         const string DEACTIVATE_ANIMATION_NAME = "BubbleBurst";
         const string TAG_TOP_WALL              = "TopWall";
         
-        public static Dictionary<GameObject, Bubble> CacheBubbles {get; private set;}
+        public static Dictionary<GameObject, Bubble> Cache {get; private set;}
 
         [SerializeField] string             _bubbleTag     = string.Empty;
         [SerializeField] List<BubbleReward> _bubbleRewards = new List<BubbleReward>();
@@ -45,35 +45,35 @@ namespace GameProcess {
         }
 
         static void AddToCache(GameObject key, Bubble bubble) {
-            if ( CacheBubbles == null ) {
-                CacheBubbles = new Dictionary<GameObject, Bubble>();
+            if ( Cache == null ) {
+                Cache = new Dictionary<GameObject, Bubble>();
             }
 
-            if ( CacheBubbles.ContainsKey(key) ) {
+            if ( Cache.ContainsKey(key) ) {
                 return;
             }
 
-            CacheBubbles.Add(key, bubble);
+            Cache.Add(key, bubble);
         }
 
         static void RemoveToCache(GameObject key) {
-            if ( CacheBubbles == null ) {
+            if ( Cache == null ) {
                 return;
             }
 
-            if ( !CacheBubbles.ContainsKey(key) ) {
+            if ( !Cache.ContainsKey(key) ) {
                 return;
             }
 
-            CacheBubbles.Remove(key);
+            Cache.Remove(key);
         }
 
         static Bubble FindToCache(GameObject key) {
-            if ( !CacheBubbles.ContainsKey(key) ) {
+            if ( !Cache.ContainsKey(key) ) {
                 return null;
             }
 
-            return CacheBubbles[key];
+            return Cache[key];
         }
 
         public static string GetRandomBubbleTag() {
@@ -304,7 +304,7 @@ namespace GameProcess {
         }
 
         void PlayBomb() {
-            foreach (var item in CacheBubbles) {
+            foreach (var item in Cache) {
                 var bubble = item.Value;
                 var dist = Vector2.Distance(transform.position, bubble.transform.position);
                 if ( (dist > _bombRadius) || (bubble == this) ) {

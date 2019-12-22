@@ -8,7 +8,6 @@ using Core.Events;
 
 using GameProcess.Events;
 using Controllers;
-using Configs;
 
 namespace GameProcess {
     public class BubblesGun : MonoBehaviour {
@@ -19,15 +18,19 @@ namespace GameProcess {
         [SerializeField] Bubble             _lastBubble    = null;
         [SerializeField] BubbleGunIndicator _indicator     = null;
 
-        List<BubbleInfo> _allBubblesInfoForGun = null;
-        int              _currentBubbleIndex   = -1;
-        int              _lastGenerateCount    = 0;
+        Queue<string> _allBubbleTagsForGun = new Queue<string>();
+        int           _lastGenerateCount   = 0;
 
-        private void Start() {
+        void Start() {
             EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
 
             var levelInfo = ConfigsController.Instance.GetLevelInfo(0);
-            _allBubblesInfoForGun = levelInfo.BubblesForGun;
+
+            foreach ( var bubbleForGun in levelInfo.BubblesForGun ) {
+                for ( int i = 0; i < bubbleForGun.Count; i++ ) {
+                    _allBubbleTagsForGun.Enqueue(bubbleForGun.Tag);
+                }
+            }
 
             var newTag = GetNewBubbleTag();
             if ( String.IsNullOrEmpty(newTag) ) {
@@ -40,11 +43,11 @@ namespace GameProcess {
             _lastGenerateCount = levelInfo.LastGenerateCount;
         }
 
-        private void OnDestroy() {
+        void OnDestroy() {
             EventManager.Unsubscribe<PostBubbleCollision>(OnPostBubbleCollision);
         }
 
-        private void Update() {
+        void Update() {
             if ( Input.GetMouseButton(0) ) {
                 var worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 
@@ -80,7 +83,7 @@ namespace GameProcess {
 
         void ReloadGun() {
             var newTag = GetNewBubbleTag();
-            newTag = String.IsNullOrEmpty(newTag) ? GetNewBubbleFromScene() : newTag;
+            newTag = String.IsNullOrEmpty(newTag) ? GetNewBubbleTagFromScene() : newTag;
 
             if ( String.IsNullOrEmpty(newTag) ) {
                 _lastBubble = null;
@@ -97,42 +100,36 @@ namespace GameProcess {
         }
 
         string GetNewBubbleTag() {
-            if ( (_allBubblesInfoForGun == null) || (_allBubblesInfoForGun.Count == 0) ) {
+            if ( (_allBubbleTagsForGun == null) || (_allBubbleTagsForGun.Count == 0) ) {
                 return null;
             }
 
-            if ( _currentBubbleIndex >= (_allBubblesInfoForGun.Count - 1) ) {
-                return null;
-            }
-
-            _currentBubbleIndex ++;
-            var tag = _allBubblesInfoForGun[_currentBubbleIndex].Tag;
-            return tag;
+            return _allBubbleTagsForGun.Dequeue();
         }
 
-        string GetNewBubbleFromScene() {
+        string GetNewBubbleTagFromScene() {
             if ( _lastGenerateCount == 0 ) {
                 return null;
             }
 
-            if ( Bubble.CacheBubbles.Count == 0 ) {
+            if ( Bubble.Cache.Count == 0 ) {
                 return null;
             }
 
             _lastGenerateCount --;
-            var bubblesList = new List<string>();
-            foreach (var itemCache in Bubble.CacheBubbles) {
-                if ( itemCache.Value != _lastBubble ) {
-                    bubblesList.Add(itemCache.Value.BubbleTag);
+            var bubbleTags = new List<string>();
+            foreach (var bubbleFromCache in Bubble.Cache) {
+                if ( bubbleFromCache.Value != _lastBubble ) {
+                    bubbleTags.Add(bubbleFromCache.Value.BubbleTag);
                 }
             }
 
-            if ( bubblesList.Count == 0 ) {
+            if ( bubbleTags.Count == 0 ) {
                 return null;
             }
 
-            var rand = UnityEngine.Random.Range(0, bubblesList.Count);
-            return bubblesList[rand];
+            var rand = UnityEngine.Random.Range(0, bubbleTags.Count);
+            return bubbleTags[rand];
         }
 
         void OnPostBubbleCollision(PostBubbleCollision e) {
@@ -144,7 +141,7 @@ namespace GameProcess {
         }
 
         void ResetAllGunFlags() {
-            foreach (var item in Bubble.CacheBubbles) {
+            foreach (var item in Bubble.Cache) {
                 var bubble = item.Value;
                 if ( bubble == _lastBubble ) {
                     continue;

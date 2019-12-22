@@ -25,6 +25,7 @@ namespace GameProcess {
 
             var column = 0;
             var line = 0;
+
             foreach (var bubbleInfo in bubbles) {
                 for ( int i = 0; i < bubbleInfo.Count; i++ ) {
                     var position = _startPoint.position;
@@ -36,7 +37,8 @@ namespace GameProcess {
                     position.x += _startOffset;
                     position.y -= _startOffset;
 
-                    var bubble = Instantiate(_bubblePrototype, position, _bubblePrototype.transform.rotation, _bubblePrototype.transform.parent);
+                    var bubble = CreateNewBubble(_bubblePrototype);
+                    bubble.transform.position = position;
                     bubble.UpdateBubbleReward(bubbleInfo.Tag);
 
                     if ( column >= (_columnCount - 1) ) {

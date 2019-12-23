@@ -750,6 +750,7 @@ MonoBehaviour:
   _lerpMove: 30
   _lastBubble: {fileID: 2130801639}
   _indicator: {fileID: 942019643}
+  _reloadDuration: 0.5
 --- !u!1 &712620688
 GameObject:
   m_ObjectHideFlags: 0

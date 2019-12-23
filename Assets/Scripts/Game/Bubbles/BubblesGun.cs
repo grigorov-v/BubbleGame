@@ -9,21 +9,24 @@ using Core.Events;
 using Game.Events;
 using Controllers;
 
+using DG.Tweening;
+
 namespace Game.Bubbles {
     public class BubblesGun : MonoBehaviour {
-        [SerializeField] float              _force         = 10;
-        [SerializeField] Transform          _bubblesCenter = null;
-        [SerializeField] Transform          _body          = null;
-        [SerializeField] float              _lerpMove      = 10f;
-        [SerializeField] Bubble             _lastBubble    = null;
-        [SerializeField] BubbleGunIndicator _indicator     = null;
+        [SerializeField] float              _force          = 10;
+        [SerializeField] Transform          _bubblesCenter  = null;
+        [SerializeField] Transform          _body           = null;
+        [SerializeField] float              _lerpMove       = 10f;
+        [SerializeField] Bubble             _lastBubble     = null;
+        [SerializeField] BubbleGunIndicator _indicator      = null;
+        [SerializeField] float              _reloadDuration = 0.5f;
 
         Queue<string> _allBubbleTagsForGun = new Queue<string>();
         int           _lastGenerateCount   = 0;
+        Tween         _tweenReload         = null;
+        bool          _canShot             = true;
 
         void Start() {
-            EventManager.Subscribe<PostBubbleCollision>(this, OnPostBubbleCollision);
-
             var levelInfo = ConfigsController.Instance.GetLevelInfo(0);
 
             foreach ( var bubbleForGun in levelInfo.BubblesForGun ) {
@@ -41,10 +44,13 @@ namespace Game.Bubbles {
                 .PhysicsSimulated(false);
                 
             _lastGenerateCount = levelInfo.LastGenerateCount;
+
+            EventManager.Subscribe<BubbleCollision>(this, OnBubbleCollision);
         }
 
         void OnDestroy() {
-            EventManager.Unsubscribe<PostBubbleCollision>(OnPostBubbleCollision);
+            KillTween();
+            EventManager.Unsubscribe<BubbleCollision>(OnBubbleCollision);
         }
 
         void Update() {
@@ -62,6 +68,7 @@ namespace Game.Bubbles {
 
             if ( Input.GetMouseButtonUp(0) ) {
                 Shot();
+                _canShot = false;
             }
 
             var isActiveIndicator = Input.GetMouseButton(0);
@@ -69,7 +76,7 @@ namespace Game.Bubbles {
         }
 
         void Shot() {
-            if ( !_lastBubble ) {
+            if ( !_canShot || !_lastBubble ) {
                 return;
             }
 
@@ -97,6 +104,12 @@ namespace Game.Bubbles {
                 .PhysicsSimulated(false)
                 .SetForce(Vector2.zero, 0)
                 .UpdateBubbleReward(newTag);
+
+            KillTween();
+            var scaleTemp = _lastBubble.transform.localScale;
+            _lastBubble.transform.localScale = Vector3.zero;
+            _tweenReload = _lastBubble.transform.DOScale(scaleTemp, _reloadDuration)
+                .SetEase(Ease.Linear).OnComplete(() => _canShot = true);
         }
 
         string GetNewBubbleTag() {
@@ -132,14 +145,6 @@ namespace Game.Bubbles {
             return bubbleTags[rand];
         }
 
-        void OnPostBubbleCollision(PostBubbleCollision e) {
-            if ( e.Bubble != _lastBubble ) {
-                return;
-            }
-
-            ReloadGun();
-        }
-
         void ResetAllGunFlags() {
             foreach (var item in Bubble.Cache) {
                 var bubble = item.Value;
@@ -149,6 +154,22 @@ namespace Game.Bubbles {
 
                 bubble.SetGunFlag(false);
             }
+        }
+
+        void KillTween() {
+            if ( _tweenReload == null ) {
+                return;
+            }
+
+            _tweenReload.Kill();
+        }
+
+        void OnBubbleCollision(BubbleCollision e) {
+            if ( e.Bubble != _lastBubble ) {
+                return;
+            }
+
+            ReloadGun();
         }
     }
 }

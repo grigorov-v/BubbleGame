@@ -4,16 +4,6 @@ using UnityEngine.EventSystems;
 using Game.Bubbles;
 
 namespace Game.Events {
-    public struct PostBubbleCollision {
-        public Bubble      Bubble    {get; private set;}
-        public Collision2D Collision {get; private set;}
-
-        public PostBubbleCollision(Bubble bubble, Collision2D collision) {
-            Bubble    = bubble;
-            Collision = collision;
-        }
-    }
-
     //================
     //Map drag
     //================
@@ -38,6 +28,19 @@ namespace Game.Events {
 
         public EndMapDrag(PointerEventData eventData) {
             EventData = eventData;
+        }
+    }
+
+    //==========
+    //BubblesCollision
+    //==========
+    public struct BubbleCollision {
+        public Bubble      Bubble    {get; private set;}
+        public Collision2D Collision {get; private set;}
+
+        public BubbleCollision(Bubble bubble, Collision2D collision) {
+            Bubble = bubble;
+            Collision = collision;
         }
     }
 }

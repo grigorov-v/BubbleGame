@@ -130,8 +130,8 @@ namespace Game.Bubbles {
                 ResetPhysics();
                 SetForce(Vector2.zero, 0);
             }
-           
-            EventManager.Fire(new PostBubbleCollision(this, other));
+
+            EventManager.Fire(new BubbleCollision(this, other));
         }
 
         private void OnCollisionStay2D(Collision2D other) {

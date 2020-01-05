@@ -17,9 +17,7 @@ namespace Controllers {
 
         public override void PostInit() {
             LoadHelper.LoadFromResources(_commonConfig, PATH_COMMON_CONFIG, "root");
-
-            var sceneName = SceneManager.GetActiveScene().name;
-            var worldInfo = FindWorldInfo(wi => (wi.MapSceneName == sceneName) || (wi.GameSceneName == sceneName));
+            var worldInfo = FindCurrentWorldInfo();
             foreach (var pair in ConfigsRegistrator.Configs) {
                 var name = pair.Key;
                 var path = worldInfo.Configs.ContainsKey(name) ? worldInfo.Configs[name] : string.Empty;
@@ -42,7 +40,8 @@ namespace Controllers {
             return null;
         }
 
-        public LevelInfo GetLevelInfo(int levelIndex) {
+        public LevelInfo GetLevelInfo() {
+            var levelIndex = SaveController.Instance.LoadLevelValue();
             var levelConfig = FindConfig<LevelConfig>();
             if ( levelConfig == null ) {
                 return null;
@@ -54,6 +53,12 @@ namespace Controllers {
             }
 
             return levels[levelIndex];
+        }
+
+        public WorldInfo FindCurrentWorldInfo() {
+            var sceneName = SceneManager.GetActiveScene().name;
+            var worldInfo = FindWorldInfo(wi => (wi.MapSceneName == sceneName) || (wi.GameSceneName == sceneName));
+            return worldInfo;
         }
 
         IConfig FindConfig(Func<IConfig, bool> factory) {

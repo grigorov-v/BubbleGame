@@ -7,6 +7,9 @@
             <configs>
                 <config name="level_config" value="Configs/CandyWorld_LevelConfig"/>
             </configs>
+            <save_info>
+                <level_key name="candy_world_level" />
+            </save_info>
         </world>
     </worlds>
 </root>

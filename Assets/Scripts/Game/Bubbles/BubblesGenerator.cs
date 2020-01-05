@@ -20,14 +20,14 @@ namespace Game.Bubbles {
  
         [Button("Generate")]
         void Generate() {
-            var levelConfig = ConfigsController.Instance.FindConfig<LevelConfig>();
-            var bubbles = levelConfig.Levels[0].Bubbles;
+            var levelInfo = ConfigsController.Instance.GetLevelInfo();
+            var bubbles = levelInfo.Bubbles;
 
             var column = 0;
             var line = 0;
 
-            foreach (var bubbleInfo in bubbles) {
-                for ( int i = 0; i < bubbleInfo.Count; i++ ) {
+            foreach ( var bubbleInfo in bubbles ) {
+                for ( var i = 0; i < bubbleInfo.Count; i++ ) {
                     var position = _startPoint.position;
                     var scale = _bubblePrototype.transform.localScale;
 

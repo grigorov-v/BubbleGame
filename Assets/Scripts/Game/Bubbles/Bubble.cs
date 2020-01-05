@@ -77,7 +77,7 @@ namespace Game.Bubbles {
         }
 
         public static string GetRandomBubbleTag() {
-            var levelInfo = ConfigsController.Instance.GetLevelInfo(0);
+            var levelInfo = ConfigsController.Instance.GetLevelInfo();
             if ( levelInfo == null ) {
                 return string.Empty;
             }

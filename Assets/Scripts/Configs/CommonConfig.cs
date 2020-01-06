@@ -18,12 +18,14 @@ namespace Configs {
     }
 
     public class WorldInfo: XmlNodeLoadable<WorldInfo> {
+        public string Name                         {get; private set;}
         public string MapSceneName                 {get; private set;}
         public string GameSceneName                {get; private set;}
         public Dictionary<string, string> Configs  {get; private set;}
         public SaveInfo                   SaveInfo {get; private set;}
 
         public WorldInfo Load(XmlNode node) {
+            Name = node.GetAttrValue("Name", string.Empty);
             var firstNode = node.SelectFirstNode("map_scene");
             MapSceneName = (firstNode != null) ? firstNode.GetAttrValue("name", string.Empty) : string.Empty;
             firstNode = node.SelectFirstNode("game_scene");

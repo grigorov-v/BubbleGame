@@ -41,7 +41,7 @@ namespace Controllers {
         }
 
         public LevelInfo FindCurrentLevelInfo() {
-            var levelIndex = SaveController.Instance.LoadLevelValue();
+            var levelIndex = SaveController.Instance.GetCurrentProgress().Level;
             var levelConfig = FindConfig<LevelConfig>();
             if ( levelConfig == null ) {
                 return null;

@@ -75,21 +75,6 @@ namespace Game.Bubbles {
 
             return Cache[key];
         }
-
-        public static string GetRandomBubbleTag() {
-            var levelInfo = ConfigsController.Instance.GetLevelInfo();
-            if ( levelInfo == null ) {
-                return string.Empty;
-            }
-
-            var bubbles = levelInfo.Bubbles;
-            if ( bubbles == null ) {
-                return string.Empty;
-            }
-
-            var rand = Random.Range(0, bubbles.Count);
-            return bubbles[rand].Tag;
-        }
        
         private void OnValidate() {
             if ( Application.isPlaying ) {
@@ -97,6 +82,7 @@ namespace Game.Bubbles {
             }
             
             UpdateBubbleReward();
+            gameObject.name = string.Format("bubble_{0}", _bubbleTag);
         }
 
         private void Awake() {
@@ -340,6 +326,12 @@ namespace Game.Bubbles {
             }
 
             return count;
+        }
+
+        public static Bubble CreateNewBubble(Bubble prototype) {
+            var newBubble = Instantiate(prototype, prototype.transform.parent);
+            newBubble.name = string.Format("Bubble[{0}]", newBubble.BubbleTag);
+            return newBubble;
         }
 
         static void RecursiveDeactivateConnectedBubbles(List<Bubble> bubbles) {

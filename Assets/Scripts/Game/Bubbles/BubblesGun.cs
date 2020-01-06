@@ -27,7 +27,7 @@ namespace Game.Bubbles {
         bool          _canShot             = true;
 
         void Start() {
-            var levelInfo = ConfigsController.Instance.GetLevelInfo();
+            var levelInfo = ConfigsController.Instance.FindCurrentLevelInfo();
 
             foreach ( var bubbleForGun in levelInfo.BubblesForGun ) {
                 for ( int i = 0; i < bubbleForGun.Count; i++ ) {
@@ -97,7 +97,7 @@ namespace Game.Bubbles {
                 return;
             }
 
-            _lastBubble = BubblesGenerator.CreateNewBubble(_lastBubble);
+            _lastBubble = Bubble.CreateNewBubble(_lastBubble);
             _lastBubble.Init()
                 .SetParent(_bubblesCenter)
                 .SetLocalPosition(Vector2.zero)

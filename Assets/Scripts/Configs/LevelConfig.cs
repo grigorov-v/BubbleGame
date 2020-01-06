@@ -17,12 +17,13 @@ namespace Configs {
     }
 
     public class LevelInfo: XmlNodeLoadable<LevelInfo> {
+        public string           LevelTemplate     {get; private set;} 
         public List<BubbleInfo> Bubbles           {get; private set;}
         public List<BubbleInfo> BubblesForGun     {get; private set;}
         public int              LastGenerateCount {get; private set;}
 
         public LevelInfo Load(XmlNode node) {
-            Bubbles           = node.LoadNodeList("bubbles", "bubble",  index => new BubbleInfo());
+            LevelTemplate     = node.GetAttrValue("template", string.Empty);
             BubblesForGun     = node.LoadNodeList("bubbles_for_gun", "bubble",  index => new BubbleInfo());
             
             var nodeBubblesForGun = node.SelectFirstNode("bubbles_for_gun");

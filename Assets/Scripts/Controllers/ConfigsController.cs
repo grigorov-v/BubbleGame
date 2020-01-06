@@ -40,7 +40,7 @@ namespace Controllers {
             return null;
         }
 
-        public LevelInfo GetLevelInfo() {
+        public LevelInfo FindCurrentLevelInfo() {
             var levelIndex = SaveController.Instance.LoadLevelValue();
             var levelConfig = FindConfig<LevelConfig>();
             if ( levelConfig == null ) {

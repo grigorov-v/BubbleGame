@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
     <!-- Level 1 -->
-    <level>
-        <bubbles>
-            <bubble tag="Lemon" count="7"/>
-            <bubble tag="Heart" count="7"/>
-            <bubble tag="BluePop" count="7"/>
-        </bubbles>
-
+    <level template="LevelTemplates/Level1_Template">
         <bubbles_for_gun last_generate_count="10">
             <bubble tag="BluePop" count="2"/>
-            <bubble tag="Heart" count="2"/>
-            <bubble tag="Lemon" count="2"/>       
+            <bubble tag="Heart"   count="2"/>
+            <bubble tag="Lemon"   count="2"/>       
         </bubbles_for_gun>
     </level>
 </root>

@@ -2,10 +2,12 @@
 <root>
     <!-- Level 1 -->
     <level template="LevelTemplates/Level1_Template">
-        <bubbles_for_gun last_generate_count="10">
-            <bubble tag="BluePop" count="2"/>
-            <bubble tag="Heart"   count="2"/>
-            <bubble tag="Lemon"   count="2"/>       
-        </bubbles_for_gun>
+        <bubbles>
+            <bubble tag="BluePop" count="1"/>
+            <bubble tag="Heart"   count="1"/>
+            <bubble tag="Lemon"   count="1"/>
+            <bubble tag="Heart"   count="1"/>
+            <bubble tag="Lemon"   count="1"/>   
+        </bubbles>
     </level>
 </root>

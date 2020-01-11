@@ -22,14 +22,13 @@ namespace Game.Bubbles {
         [SerializeField] float              _reloadDuration = 0.5f;
 
         Queue<string> _allBubbleTagsForGun = new Queue<string>();
-        int           _lastGenerateCount   = 0;
         Tween         _tweenReload         = null;
         bool          _canShot             = true;
 
         void Start() {
             var levelInfo = ConfigsController.Instance.FindCurrentLevelInfo();
 
-            foreach ( var bubbleForGun in levelInfo.BubblesForGun ) {
+            foreach ( var bubbleForGun in levelInfo.Bubbles ) {
                 for ( int i = 0; i < bubbleForGun.Count; i++ ) {
                     _allBubbleTagsForGun.Enqueue(bubbleForGun.Tag);
                 }
@@ -43,8 +42,6 @@ namespace Game.Bubbles {
             _lastBubble.UpdateBubbleReward(newTag)
                 .PhysicsSimulated(false);
                 
-            _lastGenerateCount = levelInfo.LastGenerateCount;
-
             EventManager.Subscribe<BubbleCollision>(this, OnBubbleCollision);
         }
 
@@ -90,8 +87,6 @@ namespace Game.Bubbles {
 
         void ReloadGun() {
             var newTag = GetNewBubbleTag();
-            newTag = String.IsNullOrEmpty(newTag) ? GetNewBubbleTagFromScene() : newTag;
-
             if ( String.IsNullOrEmpty(newTag) ) {
                 _lastBubble = null;
                 return;
@@ -118,31 +113,6 @@ namespace Game.Bubbles {
             }
 
             return _allBubbleTagsForGun.Dequeue();
-        }
-
-        string GetNewBubbleTagFromScene() {
-            if ( _lastGenerateCount == 0 ) {
-                return null;
-            }
-
-            if ( Bubble.Cache.Count == 0 ) {
-                return null;
-            }
-
-            _lastGenerateCount --;
-            var bubbleTags = new List<string>();
-            foreach (var bubbleFromCache in Bubble.Cache) {
-                if ( bubbleFromCache.Value != _lastBubble ) {
-                    bubbleTags.Add(bubbleFromCache.Value.BubbleTag);
-                }
-            }
-
-            if ( bubbleTags.Count == 0 ) {
-                return null;
-            }
-
-            var rand = UnityEngine.Random.Range(0, bubbleTags.Count);
-            return bubbleTags[rand];
         }
 
         void ResetAllGunFlags() {

@@ -9,5 +9,12 @@
             <bubble tag="Heart"   count="1"/>
             <bubble tag="Lemon"   count="1"/>   
         </bubbles>
+        <targets>
+            <target name="All_Bubbles"/>
+            <target name="Time"/>
+            <target name="IgnoreBubble">
+                <bubble tag="BluePop"/>
+            </target>
+        </targets>
     </level>
 </root>

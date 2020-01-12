@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Core.Controller;
-using Configs;
+using SaveValues;
 
 namespace Controllers {
     public class SaveController : BaseController<SaveController> {

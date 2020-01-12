@@ -26,7 +26,7 @@ namespace Game.Bubbles {
         bool          _canShot             = true;
 
         void Start() {
-            var levelInfo = ConfigsController.Instance.FindCurrentLevelInfo();
+            var levelInfo = LevelController.Instance.FindCurrentLevelInfo();
 
             foreach ( var bubbleForGun in levelInfo.Bubbles ) {
                 for ( int i = 0; i < bubbleForGun.Count; i++ ) {

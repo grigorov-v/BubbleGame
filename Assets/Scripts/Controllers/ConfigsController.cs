@@ -40,21 +40,6 @@ namespace Controllers {
             return null;
         }
 
-        public LevelInfo FindCurrentLevelInfo() {
-            var levelIndex = SaveController.Instance.GetCurrentProgress().Level;
-            var levelConfig = FindConfig<LevelConfig>();
-            if ( levelConfig == null ) {
-                return null;
-            }
-
-            var levels = levelConfig.Levels;
-            if ( (levels == null) || (levelIndex > levels.Count - 1) ) {
-                return null;
-            }
-
-            return levels[levelIndex];
-        }
-
         public WorldInfo FindCurrentWorldInfo() {
             var sceneName = SceneManager.GetActiveScene().name;
             var worldInfo = FindWorldInfo(wi => (wi.MapSceneName == sceneName) || (wi.GameSceneName == sceneName));

@@ -1,4 +1,6 @@
-﻿public struct ProgressId {
-    public string WorldName;
-    public int    Level;
+﻿namespace SaveValues {
+    public struct ProgressId {
+        public string WorldName;
+        public int    Level;
+    }
 }

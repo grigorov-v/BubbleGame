@@ -8,7 +8,8 @@ namespace Controllers {
     public class ControllersInitializer : MonoBehaviour {
         List<IController> _controllersRegister = new List<IController>(){
             new ConfigsController(),
-            new SaveController()
+            new SaveController(),
+            new LevelController()
         };
 
         private void Awake() {

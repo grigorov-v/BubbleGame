@@ -25,6 +25,11 @@ namespace Controllers {
             }
 
             return levels[levelIndex];
-        }        
+        }
+
+        public List<LevelTarget> GetLevelTargets() {
+            var levelInfo = FindCurrentLevelInfo();
+            return levelInfo.Targets;
+        }    
     }
 }

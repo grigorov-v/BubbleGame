@@ -20,11 +20,19 @@ namespace Controllers {
             LevelInfo = FindCurrentLevelInfo();
             LevelTargets = GetLevelTargets();
 
-            EventManager.Subscribe<BubbleCollision>(this, OnBubbleCollision);
+            EventManager.Subscribe<DeactivateBubble>(this, OnDeactivateBubble);
         }
 
         public override void Reinit() {
-            EventManager.Unsubscribe<BubbleCollision>(OnBubbleCollision);
+            EventManager.Unsubscribe<DeactivateBubble>(OnDeactivateBubble);
+        }
+
+        public bool IsLevelTarget(LevelTarget target) {
+            return LevelTargets.Exists(tr => tr == target);
+        }
+
+        public bool IsIgnoreBubble(string tag) {
+            return LevelInfo.IgnoreBubbles.Exists(b => b.Tag == tag);
         }
 
         LevelInfo FindCurrentLevelInfo() {
@@ -47,8 +55,16 @@ namespace Controllers {
             return levelInfo.Targets;
         }
 
-        void OnBubbleCollision(BubbleCollision e) {
+        void OnDeactivateBubble(DeactivateBubble e) {
+            if ( !IsLevelTarget(LevelTarget.IgnoreBubble) ) {
+                return;
+            }
 
+            if ( !IsIgnoreBubble(e.Bubble.BubbleTag) ) {
+                return;
+            }
+
+            Debug.Log("Lose");
         }   
     }
 }

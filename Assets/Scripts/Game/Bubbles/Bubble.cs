@@ -204,6 +204,8 @@ namespace Game.Bubbles {
             _deactivateParticle.transform.SetParent(null);
             _deactivateParticle.Play();
             Destroy(_deactivateParticle.gameObject, 2);
+
+            EventManager.Fire(new DeactivateBubble(this));
         }
 
         void UpdateBubbleReward() {

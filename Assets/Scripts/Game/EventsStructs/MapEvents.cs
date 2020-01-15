@@ -1,12 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Game.Bubbles;
-
 namespace Game.Events {
-    //================
-    //Map drag
-    //================
     public struct BeginMapDrag {
         public PointerEventData EventData {get; private set;}
 
@@ -28,19 +23,6 @@ namespace Game.Events {
 
         public EndMapDrag(PointerEventData eventData) {
             EventData = eventData;
-        }
-    }
-
-    //==========
-    //BubblesCollision
-    //==========
-    public struct BubbleCollision {
-        public Bubble      Bubble    {get; private set;}
-        public Collision2D Collision {get; private set;}
-
-        public BubbleCollision(Bubble bubble, Collision2D collision) {
-            Bubble = bubble;
-            Collision = collision;
         }
     }
 }

@@ -19,4 +19,12 @@ namespace Game.Events {
             Bubble = bubble;
         }
     }
+
+    public struct DestroyBubble {
+        public string BubbleTag {get; private set;}
+        
+        public DestroyBubble(string tag) {
+            BubbleTag = tag;
+        }
+    }
 }

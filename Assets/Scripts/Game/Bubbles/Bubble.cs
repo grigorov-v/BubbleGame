@@ -40,6 +40,12 @@ namespace Game.Bubbles {
             }
         }
 
+        public bool InGun {
+            get {
+                return _bubbleFromGun;
+            }
+        }
+
         bool IsHideBombRadius() {
             return _bubbleTag != "Bomb";
         }
@@ -91,6 +97,7 @@ namespace Game.Bubbles {
 
         private void OnDestroy() {
             RemoveToCache(gameObject);
+            EventManager.Fire(new DestroyBubble(_bubbleTag));
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
@@ -332,7 +339,7 @@ namespace Game.Bubbles {
 
         public static Bubble CreateNewBubble(Bubble prototype) {
             var newBubble = Instantiate(prototype, prototype.transform.parent);
-            newBubble.name = string.Format("Bubble[{0}]", newBubble.BubbleTag);
+            newBubble.name = string.Format("Bubble[{0}]", newBubble._bubbleTag);
             return newBubble;
         }
 

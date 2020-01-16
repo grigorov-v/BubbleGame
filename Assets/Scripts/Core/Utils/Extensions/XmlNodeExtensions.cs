@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Globalization;
 
 using Core.Time;
+using Core.XML;
 
-namespace Core.XML {
+namespace Core.Extensions {
 	public static class XmlNodeExtensions {
 		
 		// TryGetAttrValue

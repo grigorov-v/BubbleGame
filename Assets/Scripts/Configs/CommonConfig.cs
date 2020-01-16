@@ -5,6 +5,7 @@ using System.Xml;
 using UnityEngine;
 
 using Core.XML;
+using Core.Extensions;
 
 namespace Configs {
     public class SaveInfo: XmlNodeLoadable<SaveInfo> {

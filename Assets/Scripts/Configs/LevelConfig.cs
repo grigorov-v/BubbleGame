@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Xml;
 
 using Core.XML;
+using Core.Extensions;
+
 using LevelValues;
 using Utils;
 

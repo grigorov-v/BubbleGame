@@ -98,6 +98,7 @@ namespace Game.Bubbles {
                 .SetLocalPosition(Vector2.zero)
                 .PhysicsSimulated(false)
                 .SetForce(Vector2.zero, 0)
+                .SetGunFlag(true)
                 .UpdateBubbleReward(newTag);
 
             KillTween();

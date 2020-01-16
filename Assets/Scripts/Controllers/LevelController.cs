@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 
 using Core.Controller;
 using Core.Events;
+using Core.Extensions;
 
 using LevelValues;
 using Configs;
 using Game.Events;
+using Game.Bubbles;
 
 namespace Controllers {
     public class LevelController : BaseController<LevelController> {
@@ -21,10 +23,12 @@ namespace Controllers {
             LevelTargets = GetLevelTargets();
 
             EventManager.Subscribe<DeactivateBubble>(this, OnDeactivateBubble);
+            EventManager.Subscribe<DestroyBubble>(this, OnDestroyBubble);
         }
 
         public override void Reinit() {
             EventManager.Unsubscribe<DeactivateBubble>(OnDeactivateBubble);
+            EventManager.Unsubscribe<DestroyBubble>(OnDestroyBubble);
         }
 
         public bool IsLevelTarget(LevelTarget target) {
@@ -65,6 +69,14 @@ namespace Controllers {
             }
 
             Debug.Log("Lose");
-        }   
+        }
+
+        void OnDestroyBubble(DestroyBubble e) {
+            if ( Bubble.Cache.Exists(item => !item.Value.InGun ) ){
+                return;
+            }
+
+            Debug.Log("Win");
+        }
     }
 }

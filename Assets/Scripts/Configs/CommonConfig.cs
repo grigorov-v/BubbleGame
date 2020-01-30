@@ -4,7 +4,7 @@ using System.Xml;
 
 using UnityEngine;
 
-using Core.XML;
+using XmlConfig;
 using Core.Extensions;
 
 namespace Configs {

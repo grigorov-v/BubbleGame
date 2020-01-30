@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace Core.Events {
+namespace EventsHelper {
 	/// <summary>
 	/// Data class to represent event info in editor for debug
 	/// </summary>

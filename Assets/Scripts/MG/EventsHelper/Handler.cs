@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace Core.Events {
+namespace EventsHelper {
 	sealed class Handler<T> : HandlerBase {
 		List<Action<T>> _actions  = new List<Action<T>>(100);
 		List<Action<T>> _removed  = new List<Action<T>>(100);

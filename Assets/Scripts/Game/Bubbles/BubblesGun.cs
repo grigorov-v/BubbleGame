@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Core.Events;
+using EventsHelper;
 
 using Game.Events;
 using Controllers;

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Core.Controller;
-using Core.XML;
+using XmlConfig;
 
 using Configs;
 

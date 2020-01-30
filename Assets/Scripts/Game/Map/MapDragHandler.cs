@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Core.Events;
+using EventsHelper;
 using Game.Events;
 
 namespace Game.Bubbles {

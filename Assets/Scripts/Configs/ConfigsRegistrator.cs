@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Core.XML;
+using XmlConfig;
 
 namespace Configs {
     public class ConfigsRegistrator {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-using Core.XML;
+using XmlConfig;
 using Core.Extensions;
 
 using LevelValues;

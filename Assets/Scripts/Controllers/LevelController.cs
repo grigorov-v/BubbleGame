@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Core.Controller;
-using Core.Events;
+using EventsHelper;
 using Core.Extensions;
 
 using LevelValues;

@@ -3,9 +3,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-using Core.Singleton;
+using Singleton;
 
-namespace Core.Events {
+namespace EventsHelper {
 	/// <summary>
 	/// Event system implementation
 	/// </summary>

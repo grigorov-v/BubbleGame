@@ -2,7 +2,7 @@
 
 using System.Xml;
 
-namespace Core.XML {
+namespace XmlConfig {
     public class LoadHelper {
         public static void LoadFromResources(IConfig config, string assetPath, string nodeName) {
             var xmlAsset = Resources.Load(assetPath) as TextAsset;

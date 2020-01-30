@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-using Core.Events;
+using EventsHelper;
 using Game.Events;
 
 using DG.Tweening;

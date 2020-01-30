@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace Core.XML {
+namespace XmlConfig {
 	public interface IConfig {
 		void Load(XmlNode node);
 	}

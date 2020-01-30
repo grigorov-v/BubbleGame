@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Core.Events {
+namespace EventsHelper {
 	public abstract class HandlerBase {
 		public static bool LogsEnabled { get { return false;       }}
 		public static bool AllFireLogs { get { return LogsEnabled; }}
